@@ -6,9 +6,35 @@
 </description>
     <link>https://0xcodezero.github.io/</link>
     <atom:link href="https://0xcodezero.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Sep 2015 22:05:32 +0300</pubDate>
-    <lastBuildDate>Wed, 30 Sep 2015 22:05:32 +0300</lastBuildDate>
+    <pubDate>Wed, 30 Sep 2015 23:06:07 +0300</pubDate>
+    <lastBuildDate>Wed, 30 Sep 2015 23:06:07 +0300</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Apple: Inspiring Talk by Steve Jobs</title>
+        <description>&lt;p&gt;It was a very &lt;em&gt;inspiring internal/confidential talk by Steve Jobs&lt;/em&gt; after &lt;code&gt;8 weeks&lt;/code&gt; after joining back Apple board. He talked closely to his engineers, started to get attention and focus. Clarifying the company vision, no blaming for previous work, focus on key points that all have been understood.&lt;/p&gt;
+
+&lt;p&gt;He is such a clever leader, inspiring salesman, passioned thinker … simply &lt;code&gt;He is steve!&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://www.youtube.com/watch?v=9GMQhOm-Dqo&quot;&gt;Steve Talk&lt;/a&gt;.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/9GMQhOm-Dqo?color=white&amp;amp;theme=light&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Check his &lt;code&gt;movements&lt;/code&gt;, &lt;code&gt;stop times&lt;/code&gt;, &lt;code&gt;words&lt;/code&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 30 Sep 2015 22:00:00 +0300</pubDate>
+        <link>https://0xcodezero.github.io/inspiring/talks,/apple,/technology/2015/09/30/inspiring-talk-steve-jobs.html</link>
+        <guid isPermaLink="true">https://0xcodezero.github.io/inspiring/talks,/apple,/technology/2015/09/30/inspiring-talk-steve-jobs.html</guid>
+        
+        
+        <category>inspiring</category>
+        
+        <category>talks,</category>
+        
+        <category>apple,</category>
+        
+        <category>technology</category>
+        
+      </item>
     
       <item>
         <title>Welcome to Jekyll!</title>

@@ -9,7 +9,7 @@ It was a very *inspiring internal/confidential talk by Steve Jobs* after `8 week
 He is such a clever leader, inspiring salesman, passioned thinker ... simply `He is steve!`
 
 Check out the [Steve Talk][steve-talk].
-{% youtube 9GMQhOm-Dqo %}
+<iframe width='560' height='420' src='http://www.youtube.com/embed/9GMQhOm-Dqo'/>
 Check his `movements`, `stop times`, `words`.
 
 [steve-talk]:		https://www.youtube.com/watch?v=9GMQhOm-Dqo

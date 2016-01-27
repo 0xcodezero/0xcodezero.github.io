@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head lang="en">
+
+  <meta charset="UTF-8">
+  <title></title>
+
+  <script type="text/javascript" src="vendors/jquery-1.9.1.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('select').change(function(){
+        $("#myiframe").attr("src", $(this).val())
+      });
+    });
+  </script>
+
+  <style>
+
+     body {
+       font-family: Arial, Helvetica, sans-serif;
+       height: 100%;
+       padding: 0; margin: 0;
+    }
+
+
+
+     #myiframe-wrap {
+       position: absolute;
+       top: 50px;
+       right: 0px;
+       bottom: 0px;
+       left: 0px;
+     }
+
+
+     #myiframe {
+       position: absolute;
+       display: block;
+       border: 0;
+       height: 100%;
+       width: 100%;
+     }
+
+    header {
+      background-color: #000;
+      color: white;
+      width: 100%;
+      height: 50px;
+
+    }
+
+    header #logo {
+      padding-top: 5px;
+      padding-left: 5px;
+    }
+    header .right {
+      text-align: center;
+      vertical-align: middle;
+      line-height: 40px;
+      color: #888;
+
+    }
+
+
+     .styled-select select {
+       /*background: transparent;*/
+       background-color: #222;
+       margin-top: 5px;
+       color: #fff;
+       width: 300px;
+       padding: 5px;
+       font-size: 16px;
+       line-height: 1;
+       border: 0;
+       border-radius: 0;
+       height: 34px;
+       -webkit-appearance: none;
+       float: center;
+     }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+<header>
+  <div style="position:absolute">
+    <img id="logo" src="logo_examples.png" alt="VideoGL"/>
+  </div>
+
+  <div class="right">
+    <div class="styled-select">
+
+      <select>
+        <option value="001_interactive_3d_and_reflection.html">Basix Example</option>
+        <option value="006_filters.html">Filters Demo</option>
+        <option value="002_options_and_animations.html">Tween and animations</option>
+        <option value="007_gallery.html">Gallery Example 1</option>
+        <option value="008_gallery2_no_html_tag.html">Gallery Example 2 / NO HTML video tag</option>
+        <option value="009_plain_fullscreen_background.html">Plain 2D FullScreen with filter</option>
+        <option value="004_CustomVideoEvents.html">Custom Video Events</option>
+        <option value="003_NoHtmlVideoTag.html">Basic Example with no HTML video tag</option>
+        <option value="005_MultipleInstance.html">Multiple players example</option>
+      </select>
+    </div>
+  </div>
+
+</header>
+
+
+<div id="myiframe-wrap">
+  <iframe id="myiframe" src="001_interactive_3d_and_reflection.html"   border="0" frameborder="0"></iframe>
+</div>
+
+</body>
+</html>

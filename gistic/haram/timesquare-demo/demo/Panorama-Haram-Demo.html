@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+
+  <link rel=stylesheet href="css/custom_style.css"/>
+
+  <script type="text/javascript" src="vendors/modernizr.js"></script>
+  <script type="text/javascript" src="vendors/threejs.custom.min.js"></script>
+  <script type="text/javascript" src="vendors/threejs.filters.custom.js"></script>
+  <script type="text/javascript" src="vendors/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="../src/videogl.min.js"></script>
+
+
+
+  <style>
+
+    #video1, #video2, #video3  {
+      display: none;
+    }
+
+    #video1.nowebgl,  #video2.nowebgl,  #video3.nowebgl {
+      display: block !important;
+      width: 100%;
+      height: 100%;
+    }
+
+    #Wrapper1 {
+      position: absolute; top: 100px; left: 10px; width: 70%; height: 100%; z-index: 3000;
+    }
+    #Wrapper2 {
+      position: absolute; top: 100px; left: 100px; width: 70%; height: 100%; z-index: 4000;
+    }
+
+    #Wrapper3 {
+      position: absolute; top: 200px; left: 500px; width: 70%; height: 100%; z-index: 1000;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+
+      // The first video tag is created by videoGL
+      $("#Wrapper1").videoGL(
+        {
+          "videoID": "video1",
+          "videoWidth": 800,
+          "videoHeight": 520,
+          "cameraX": 0,
+          "cameraY": 0,
+          "cameraZ": 800
+        });
+
+    // The second video tag is directly written into the HTML (see below)
+      $("#Wrapper2").videoGL(
+        {
+          "videoID": "video2",
+          "videoWidth": 800,
+          "videoHeight": 520,
+          "cameraX": 500,
+          "cameraY": 0,
+          "cameraZ": 800
+        });
+
+      $("#Wrapper3").videoGL(
+        {
+          "videoID": "video3",
+          "videoWidth": 800,
+          "videoHeight": 520,
+          "cameraX": -500,
+          "cameraY": -200,
+          "cameraZ": 800
+        });
+
+
+      // Animate videos
+      $( "#animateBtn" ).click(function() {
+        jQuery.videoGL.tween("video1", { "cameraX": -100, "cameraY": 0, "cameraZ": 250}, 1200, TWEEN.Easing.Quintic.InOut);
+        jQuery.videoGL.tween("video2", { "cameraX": 300, "cameraZ": 400}, 750, TWEEN.Easing.Back.Out, 1200);
+      });
+
+
+      $( "#loadVideoBtn" ).click(function() {
+
+        $.videoGL.loadVideo("video2", 1280,720, {
+          "mp4": "videos/left.m4v", /*"videos/big_buck_bunny.mp4",*/
+        }, false)
+
+      });
+
+      $( "#stopVideo" ).click(function() {
+        $.videoGL.getVideo("video1").pause();
+        $.videoGL.getVideo("video2").pause();
+        $.videoGL.getVideo("video3").pause();
+      });
+
+      $( "#playVideo" ).click(function() {
+        $.videoGL.getVideo("video1").play();
+        $.videoGL.getVideo("video2").play();
+        $.videoGL.getVideo("video3").play();
+      });
+
+
+      ///////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
+      ///// IMPORTANT: when using multiple video players in the same page you can only
+      ///// apply filters to one of them. You will get an error if you try to apply
+      ////  filters to both players
+      ///////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
+      $( "#filterSepiaBtn" ).click(function() {
+        $.videoGL.filters.sepia("video1", {"amount": 0.9});
+      });
+
+      $( "#filterFilmBtn" ).click(function() {
+        $.videoGL.filters.film("video1", {"scount": 256, "grayscale": false, "sintensity": 0.3, "nintensity": 0.8});
+      });
+    });
+
+  </script>
+  <img id="logo" src="gistic.jpg" alt="Gistic">
+
+  <button id="printVideo" class="btnPanels">Print coordinates</button>
+  <button id="stopVideo" class="btnPanels">Stop videos</button>
+  <button id="playVideo" class="btnPanels">Play videos</button>
+
+  <div id="Wrapper1" ></div>
+  <div id="Wrapper2" ></div>
+  <div id="Wrapper3" ></div>
+
+  <video id="video1" autoplay  style="display:none;">
+    <source src="videos/first.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+
+  <video id="video2" autoplay  style="display:none;">
+    <source src="videos/second.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+
+  <video id="video3" autoplay  style="display:none;">
+    <source src="videos/third.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+  </video>
+
+
+  <div id="description"> The video is </div>
+  <script type="text/javascript">
+  /* now play three times as fast just for the heck of it */
+  document.getElementById("video1").playbackRate = 0.5;
+
+  $( "#printVideo" ).click(function() {
+        document.getElementById("description").innerHTML = $.videoGL.getVideo("video1");
+  });
+
+  </script>
+
+</body>
+</html>

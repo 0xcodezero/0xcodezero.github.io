@@ -131,7 +131,16 @@
         $.videoGL.enableMouseRotate("videoD3", false);
         
         $('#Wrapper1').on('mousedown', function(e) {  
-            jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 100, TWEEN.Easing.Quadratic.In);
+            console.log($( window ).width());
+            
+            if(e.pageX > ( $( window ).width() / 2) )
+            {
+                jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 200, TWEEN.Easing.Quadratic.In);
+            }else
+            {
+                jQuery.videoGL.tween("video1", { "cameraX": -300, "cameraY": -200, "cameraZ": 500, "rotationX":0.0, "rotationY":0.0, "rotationZ":0.6}, 100, TWEEN.Easing.Quadratic.In);
+            }
+                
         });
 
         $('#Wrapper1').on('mouseup', function(e) {  

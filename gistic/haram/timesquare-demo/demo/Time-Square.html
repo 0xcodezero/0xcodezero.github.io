@@ -5,7 +5,6 @@
   <title></title>
 
   <link rel=stylesheet href="css/custom_style.css"/>
-
   <script type="text/javascript" src="vendors/modernizr.js"></script>
   <script type="text/javascript" src="vendors/threejs.custom.min.js"></script>
   <script type="text/javascript" src="vendors/threejs.filters.custom.js"></script>
@@ -54,7 +53,7 @@
         width: 100%;
         position: fixed;
         bottom: 0px;
-        height: 60%
+        height: 60%;
     }
       
     #logo{
@@ -107,7 +106,7 @@
 
       // Animate videos
       $( "#animateBtn" ).click(function() {
-        jQuery.videoGL.tween("video1", { "cameraX": -100, "cameraY": 0, "cameraZ": 250}, 1200, TWEEN.Easing.Quintic.InOut);
+        jQuery.videoGL.tween("video1", { "cameraX": 400, "cameraY": 0, "cameraZ": 250}, 1200, TWEEN.Easing.Quintic.InOut);
       });
 
       $( "#stopVideo" ).click(function() {
@@ -123,13 +122,22 @@
 
       });
         
+        $.videoGL.enableMouseZoom("video1", false);
+        $.videoGL.enableMouseRotate("video1", false);
         
         $.videoGL.enableMouseZoom("videoD1", false);
-        $.videoGL.enableMouseZoom("videoD2", false);
         $.videoGL.enableMouseZoom("videoD3", false);
         $.videoGL.enableMouseRotate("videoD1", false);
-        $.videoGL.enableMouseRotate("videoD2", false);
-        $.videoGL.enableMouseRotate("videoD3", false);        
+        $.videoGL.enableMouseRotate("videoD3", false);
+        
+        $('#Wrapper1').on('mousedown', function(e) {  
+            jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 100, TWEEN.Easing.Quadratic.In);
+        });
+
+        $('#Wrapper1').on('mouseup', function(e) {  
+            jQuery.videoGL.tween("video1", { "cameraX": 0, "cameraY": 0, "cameraZ": 600, "rotationX":0, "rotationY":0, "rotationZ":0}, 200, TWEEN.Easing.Quadratic.In);
+        });
+        
     });
 
   </script>
@@ -143,18 +151,11 @@
     </div>
     <div id="demos">    
         <div id="WrapperD1" ></div>
-<!--        <div id="WrapperD2" ></div>-->
         <div id="WrapperD3" ></div>
         
         <video id="videoD1" autoplay  style="display:none;">
         <source src="videos/cam1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         </video>
-
-<!--
-      <video id="videoD2" autoplay  style="display:none;">
-        <source src="videos/second.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-      </video>
--->
 
       <video id="videoD3" autoplay  style="display:none;">
         <source src="videos/cam3.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
@@ -174,7 +175,6 @@
     <img id="logo" src="gisitc-logo.png" alt="Gistic">      
     
   <script type="text/javascript">
-  /* now play three times as fast just for the heck of it */
     
   </script>
 

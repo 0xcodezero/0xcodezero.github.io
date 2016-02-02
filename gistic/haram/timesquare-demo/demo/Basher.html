@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+
+  <link rel=stylesheet href="css/custom_style.css"/>
+  <script type="text/javascript" src="vendors/modernizr.js"></script>
+  <script type="text/javascript" src="vendors/threejs.custom.min.js"></script>
+  <script type="text/javascript" src="vendors/threejs.filters.custom.js"></script>
+  <script type="text/javascript" src="vendors/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="../src/videogl.min.js"></script>
+
+  <style>
+
+    #controls {
+      position: fixed; top: 0px; left: 0px; width: 100%; height: 40px;z-index: 5000;
+    }
+      
+    #demos {}
+    #WrapperD1,
+    #WrapperD3 {
+        float: left;
+        width: 50%;
+    }
+    #WrapperD1 {}
+    #WrapperD2 {}
+    #WrapperD3 {}
+      
+    #video1 {
+      display: none;
+    }
+    #videoD1, #videoD2, #videoD3  {
+      display: none;
+    }
+
+    #video1.nowebgl {
+      display: block !important;
+      width: 100%;
+      height: 100%;
+    }
+      
+    #videoD1.nowebgl,  #videoD2.nowebgl,  #videoD3.nowebgl {
+      display: block !important;
+      width: 100%;
+      height: 100%;
+    }
+
+    #zoomable{
+    }
+    #Wrapper1 {
+        clear: both;
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        height: 60%;
+    }
+      
+    #logo{
+        position: fixed; bottom: 0px;right: 0px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+
+        // The first video tag is created by videoGL
+      $("#WrapperD1").videoGL(
+        {
+          "videoID": "videoD1",
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "cameraX": 0,
+          "cameraY": 0,
+          "cameraZ": 800
+        });
+
+      $("#WrapperD3").videoGL(
+        {
+          "videoID": "videoD3",
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "cameraX": 0,
+          "cameraY": 0,
+          "cameraZ": 800
+        });
+
+        
+
+         // The first video tag is created by videoGL
+      $("#Wrapper1").videoGL(
+        {
+          "videoID": "video1",
+          "videoWidth": 880,
+          "videoHeight": 720,
+          "cameraX": 0,
+          "cameraY": 0,
+          "cameraZ": 600,
+        });
+        
+
+      // Animate videos
+      $( "#animateBtn" ).click(function() {
+        jQuery.videoGL.tween("video1", { "cameraX": 400, "cameraY": 0, "cameraZ": 250}, 1200, TWEEN.Easing.Quintic.InOut);
+      });
+
+      $( "#stopVideo" ).click(function() {
+        $.videoGL.getVideo("video1").pause();
+        $.videoGL.getVideo("videoD1").pause();
+        $.videoGL.getVideo("videoD3").pause();
+      });
+
+      $( "#playVideo" ).click(function() {
+        $.videoGL.getVideo("video1").play();
+        $.videoGL.getVideo("videoD1").play();
+        $.videoGL.getVideo("videoD3").play();
+
+      });
+        
+        $.videoGL.enableMouseZoom("video1", false);
+        $.videoGL.enableMouseRotate("video1", false);
+        
+        $.videoGL.enableMouseZoom("videoD1", false);
+        $.videoGL.enableMouseZoom("videoD3", false);
+        $.videoGL.enableMouseRotate("videoD1", false);
+        $.videoGL.enableMouseRotate("videoD3", false);
+        
+        $('#Wrapper1').on('mousedown', function(e) {  
+            console.log($( window ).width());
+            
+            if(e.pageX > ( $( window ).width() / 2) )
+            {
+                jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 200, TWEEN.Easing.Quadratic.In);
+            }else
+            {
+                jQuery.videoGL.tween("video1", { "cameraX": -300, "cameraY": -200, "cameraZ": 500, "rotationX":0.0, "rotationY":0.0, "rotationZ":0.6}, 100, TWEEN.Easing.Quadratic.In);
+            }
+                
+        });
+
+        $('#Wrapper1').on('mouseup', function(e) {  
+            jQuery.videoGL.tween("video1", { "cameraX": 0, "cameraY": 0, "cameraZ": 600, "rotationX":0, "rotationY":0, "rotationZ":0}, 200, TWEEN.Easing.Quadratic.In);
+        });
+        
+    });
+
+  </script>
+  
+    
+    <div id="controls">
+        <button id="pamoramaHaram" class="btnPanels" disabled=true>Panorama Haram</button> <b>:</b>
+        <button id="stopVideo" class="btnPanels">Stop videos</button>
+        <button id="playVideo" class="btnPanels">Play videos</button>
+        
+    </div>
+    <div id="demos">    
+        <div id="WrapperD1" ></div>
+        <div id="WrapperD3" ></div>
+        
+        <video id="videoD1" autoplay  style="display:none;">
+        <source src="videos/cam1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
+
+      <video id="videoD3" autoplay  style="display:none;">
+        <source src="videos/cam3.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+      </video>
+        
+    </div>
+    
+    <div id="zoomable"> 
+        <div id="Wrapper1" ></div>
+
+        <video id="video1" autoplay  style="display:none;">
+           <source src="videos/panorama.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
+        
+    </div>
+    
+    <img id="logo" src="gisitc-logo.png" alt="Gistic">      
+    
+  <script type="text/javascript">
+    
+  </script>
+
+</body>
+</html>

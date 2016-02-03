@@ -4,15 +4,24 @@
   <meta charset="UTF-8">
   <title></title>
 
+  <link rel=stylesheet href="css/bootstrap.min.css"/>
   <link rel=stylesheet href="css/custom_style.css"/>
+    
   <script type="text/javascript" src="vendors/modernizr.js"></script>
   <script type="text/javascript" src="vendors/threejs.custom.min.js"></script>
   <script type="text/javascript" src="vendors/threejs.filters.custom.js"></script>
   <script type="text/javascript" src="vendors/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="../src/videogl.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
   <style>
 
+      .btn-default
+      {
+        background-color: black;
+          color: white
+      }
+      
     #controls {
       position: fixed; top: 0px; left: 0px; width: 100%; height: 40px;z-index: 5000;
     }
@@ -96,7 +105,7 @@
       $("#Wrapper1").videoGL(
         {
           "videoID": "video1",
-          "videoWidth": 880,
+          "videoWidth": 1280,
           "videoHeight": 720,
           "cameraX": 0,
           "cameraY": 0,
@@ -112,6 +121,7 @@
       $( "#stopVideo" ).click(function() {
         $.videoGL.getVideo("video1").pause();
         $.videoGL.getVideo("videoD1").pause();
+        $.videoGL.getVideo("videoD2").pause();
         $.videoGL.getVideo("videoD3").pause();
       });
 
@@ -153,6 +163,68 @@
         $('#Wrapper1').on('mouseup', function(e) {  
             jQuery.videoGL.tween("video1", { "cameraX": 0, "cameraY": 0, "cameraZ": 600, "rotationX":0, "rotationY":0, "rotationZ":0}, 200, TWEEN.Easing.Quadratic.In);
         });
+    
+        
+        $(".dropdown-menu li a").click(function(){
+            $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+            $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+            demoSegment = $(this).data('value');
+            
+            if (demoSegment == "ThirdRingRoad")
+            {
+                panoramaVideo = "videos/thirdRingRoad-panorama.m4v";
+                demosArray = ["videos/cam-Third-01.m4v","videos/cam-Third-02.m4v"];
+                videoWidth = 1280;
+                videoHeight = 720;
+            }
+            else if(demoSegment == "GisticBuilding")
+            {
+                panoramaVideo = "videos/gistic-building-panorama.m4v";
+                demosArray = ["videos/cam1.mp4","videos/cam3.mp4"];
+                videoWidth = 1280;
+                videoHeight = 720;
+            }
+            else if(demoSegment == "TimeSquare")
+            {
+                panoramaVideo = "videos/time-panorama.m4v";
+                demosArray = ["videos/cam1.mp4","videos/cam3.mp4"];
+                videoWidth = 1280;
+                videoHeight = 720;
+            }
+            
+            $.videoGL.loadVideo("video1", videoWidth,videoHeight, {
+                "mp4": panoramaVideo,
+            }, false);
+            
+            if(demosArray.length == 2)
+            {
+                $.videoGL.loadVideo("videoD1", videoWidth,videoHeight, {
+                    "mp4": demosArray[0],
+                }, false);
+                
+                $.videoGL.loadVideo("videoD3", videoWidth,videoHeight, {
+                    "mp4": demosArray[1],
+                }, false);
+                
+            }
+            else
+            {
+                
+                $.videoGL.loadVideo("videoD1", videoWidth,videoHeight, {
+                    "mp4": demosArray[0],
+                }, false);
+                
+                $.videoGL.loadVideo("videoD2", videoWidth,videoHeight, {
+                    "mp4": demosArray[1],
+                }, false);
+                
+                $.videoGL.loadVideo("videoD3", videoWidth,videoHeight, {
+                    "mp4": demosArray[2],
+                }, false);
+                
+            }
+            
+        });
         
     });
 
@@ -163,6 +235,18 @@
         <button id="pamoramaHaram" class="btnPanels" disabled=true>Panorama Haram</button> <b>:</b>
         <button id="stopVideo" class="btnPanels">Stop videos</button>
         <button id="playVideo" class="btnPanels">Play videos</button>
+        
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="selectedDemoButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Select Demo
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="selectedDemoButton">
+            <li><a href="#" data-value="ThirdRingRoad">Third Ring Road</a></li>
+            <li><a href="#" data-value="GisticBuilding">Gistic Building</a></li>
+            <li><a href="#" data-value="TimeSquare">Time Square</a></li>
+          </ul>
+        </div>
         
     </div>
     <div id="demos">    
@@ -183,7 +267,7 @@
         <div id="Wrapper1" ></div>
 
         <video id="video1" autoplay  style="display:none;">
-           <source src="videos/panorama.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+           <source src="videos/time-panorama.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         </video>
         
     </div>
@@ -191,7 +275,10 @@
     <img id="logo" src="gisitc-logo.png" alt="Gistic">      
     
   <script type="text/javascript">
-    
+    var demoSegment;
+    var demosArray;
+    var panoramaVideo;
+    var videoWidth, videoHeight;
   </script>
 
 </body>

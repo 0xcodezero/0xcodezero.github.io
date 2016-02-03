@@ -28,9 +28,10 @@
       
     #demos {}
     #WrapperD1,
+    #WrapperD2,
     #WrapperD3 {
         float: left;
-        width: 50%;
+        width: 33%;
     }
     #WrapperD1 {}
     #WrapperD2 {}
@@ -88,6 +89,16 @@
           "cameraY": 0,
           "cameraZ": 800
         });
+        
+        $("#WrapperD2").videoGL(
+        {
+          "videoID": "videoD2",
+          "videoWidth": 1280,
+          "videoHeight": 720,
+          "cameraX": 0,
+          "cameraY": 0,
+          "cameraZ": 800
+        });
 
       $("#WrapperD3").videoGL(
         {
@@ -121,13 +132,16 @@
       $( "#stopVideo" ).click(function() {
         $.videoGL.getVideo("video1").pause();
         $.videoGL.getVideo("videoD1").pause();
-        $.videoGL.getVideo("videoD2").pause();
+          if (demoSegment == "GisticBuilding")
+              $.videoGL.getVideo("videoD2").pause();
         $.videoGL.getVideo("videoD3").pause();
       });
 
       $( "#playVideo" ).click(function() {
         $.videoGL.getVideo("video1").play();
         $.videoGL.getVideo("videoD1").play();
+          if (demoSegment == "GisticBuilding")
+              $.videoGL.getVideo("videoD2").play();
         $.videoGL.getVideo("videoD3").play();
 
       });
@@ -136,28 +150,47 @@
         $.videoGL.enableMouseRotate("video1", false);
         
         $.videoGL.enableMouseZoom("videoD1", false);
+        $.videoGL.enableMouseZoom("videoD2", false);
         $.videoGL.enableMouseZoom("videoD3", false);
         $.videoGL.enableMouseRotate("videoD1", false);
+        $.videoGL.enableMouseRotate("videoD2", false);
         $.videoGL.enableMouseRotate("videoD3", false);
         
         
         $.videoGL.enableVideoLoop("video1", true);
         
         $.videoGL.enableVideoLoop("videoD1", true);
+        $.videoGL.enableVideoLoop("videoD2", true);
         $.videoGL.enableVideoLoop("videoD3", true);
         
         
         $('#Wrapper1').on('mousedown', function(e) {  
-            console.log($( window ).width());
-            
-            if(e.pageX > ( $( window ).width() / 2) )
-            {
-                jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 200, TWEEN.Easing.Quadratic.In);
-            }else
-            {
-                jQuery.videoGL.tween("video1", { "cameraX": -300, "cameraY": -200, "cameraZ": 500, "rotationX":0.0, "rotationY":0.0, "rotationZ":0.6}, 100, TWEEN.Easing.Quadratic.In);
+            if(demoSegment == "TimeSquare"){
+                if(e.pageX > ( $( window ).width() / 2) )
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": 500, "cameraY": 80, "cameraZ": 80, "rotationX":-0.9, "rotationY":0.2, "rotationZ":0.15}, 200, TWEEN.Easing.Quadratic.In);
+                }else
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": -300, "cameraY": -200, "cameraZ": 500, "rotationX":0.0, "rotationY":0.0, "rotationZ":0.6}, 100, TWEEN.Easing.Quadratic.In);
+                }    
+            } else if(demoSegment == "GisticBuilding"){
+                if(e.pageX > ( $( window ).width() / 2) )
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": 300, "cameraY": -50, "cameraZ": 600, "rotationX":0.0, "rotationY":0.0, "rotationZ":0.5}, 200, TWEEN.Easing.Quadratic.In);
+                }else
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": 100, "cameraY": 0, "cameraZ": 600, "rotationX":0.0, "rotationY":0.0, "rotationZ":-0.3}, 200, TWEEN.Easing.Quadratic.In);
+                }    
+            } else if(demoSegment == "ThirdRingRoad"){
+                if(e.pageX > ( $( window ).width() / 2) )
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": 0, "cameraY": 0, "cameraZ": 600, "rotationX":0, "rotationY":0, "rotationZ":0}, 200, TWEEN.Easing.Quadratic.In);
+                }else
+                {
+                    jQuery.videoGL.tween("video1", { "cameraX": 100, "cameraY": 0, "cameraZ": 600, "rotationX":0.0, "rotationY":0.0, "rotationZ":-0.1}, 200, TWEEN.Easing.Quadratic.In);
+                }    
             }
-                
+            
         });
 
         $('#Wrapper1').on('mouseup', function(e) {  
@@ -180,16 +213,17 @@
             else if(demoSegment == "GisticBuilding")
             {
                 panoramaVideo = "videos/gistic-building-panorama.m4v";
-                demosArray = ["videos/cam1.mp4","videos/cam3.mp4"];
+                demosArray = ["videos/first.m4v","videos/second.m4v","videos/third.m4v"];
+                
                 videoWidth = 1280;
                 videoHeight = 720;
             }
             else if(demoSegment == "TimeSquare")
             {
-                panoramaVideo = "videos/time-panorama.m4v";
+                panoramaVideo = "videos/time-panorama-2.m4v";
                 demosArray = ["videos/cam1.mp4","videos/cam3.mp4"];
                 videoWidth = 1280;
-                videoHeight = 720;
+                videoHeight = 1047;
             }
             
             $.videoGL.loadVideo("video1", videoWidth,videoHeight, {
@@ -200,6 +234,10 @@
             {
                 $.videoGL.loadVideo("videoD1", videoWidth,videoHeight, {
                     "mp4": demosArray[0],
+                }, false);
+                
+                $.videoGL.loadVideo("videoD2", 0,0, {
+                    "mp4": "",
                 }, false);
                 
                 $.videoGL.loadVideo("videoD3", videoWidth,videoHeight, {
@@ -251,14 +289,19 @@
     </div>
     <div id="demos">    
         <div id="WrapperD1" ></div>
+        <div id="WrapperD2" ></div>
         <div id="WrapperD3" ></div>
         
         <video id="videoD1" autoplay style="display:none;">
-        <source src="videos/cam1.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="videos/first.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         </video>
-
+        
+        <video id="videoD2" autoplay style="display:none;">
+        <source src="videos/second.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>
+        
       <video id="videoD3" autoplay style="display:none;">
-        <source src="videos/cam3.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="videos/third.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
       </video>
         
     </div>
@@ -267,7 +310,7 @@
         <div id="Wrapper1" ></div>
 
         <video id="video1" autoplay  style="display:none;">
-           <source src="videos/time-panorama.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+           <source src="videos/gistic-building-panorama.m4v" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         </video>
         
     </div>
@@ -275,7 +318,7 @@
     <img id="logo" src="gisitc-logo.png" alt="Gistic">      
     
   <script type="text/javascript">
-    var demoSegment;
+    var demoSegment = "GisticBuilding";
     var demosArray;
     var panoramaVideo;
     var videoWidth, videoHeight;

@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
     var userEnteredAlreadyADigit = false
-    
+    var brain = CalculatorBrain()
 
     @IBAction func numberInputAction(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -31,48 +31,26 @@ class ViewController: UIViewController {
         {
             enter()
         }
-        switch operation
+        
+        if let result = brain.pushOperation(operation) {
+            displayValue = result
+        }else
         {
-            case "×": performOperation {$0 * $1}
-            case "+": performOperation {$0 + $1}
-            case "÷": performOperation {$1 / $0}
-            case "−": performOperation {$1 - $0}
-            case "√": performOperation2 {sqrt($0)}
-        default: break
+            displayValue = 0; // TODO
         }
     }
-    var operandStack =  Array<Double>()
     
     @IBAction func enter() {
         userEnteredAlreadyADigit = false
-        operandStack.append(displayValue)
-        print("operandStack = \(operandStack)")
-    }
-    
-    func performOperation (operation : (Double, Double) -> Double)
-    {
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
+        if let result = brain.pushOperand(displayValue)
+        {
+            displayValue = result;
+        }else
+        {
+            displayValue = 0; // TODO
         }
     }
-    
-    func performOperation2 (operation : Double -> Double)
-    {
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            enter()
-        }
-    }
-    
-    func divide(operand1: Double, operand2:Double) -> Double
-    {
-        if operand1 >= 0.0000001 ||  operand1 <= -0.0000001 {
-            return 1.0 / operand1 * operand2;
-        }
-        return 999999999999.0;
-    }
-    
+
     var displayValue : Double {
         get{
             return NSNumberFormatter().numberFromString(display.text!)!.doubleValue

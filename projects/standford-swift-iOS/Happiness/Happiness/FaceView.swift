@@ -8,19 +8,29 @@
 
 import UIKit
 
+protocol HappinessDataSource : class{
+    func smilenessForFaceView(sender: FaceView) -> Double?
+}
+
+@IBDesignable
 class FaceView: UIView {
     
+    @IBInspectable
     var lineWidth : CGFloat = 3 {
         didSet{setNeedsDisplay()}
     }
     
+    @IBInspectable
     var lineColor : UIColor = UIColor.blueColor() {
         didSet{setNeedsDisplay()}
     }
     
+    @IBInspectable
     var lineScale : CGFloat = 0.9 {
         didSet{setNeedsDisplay()}
     }
+    
+    weak var dataSource : HappinessDataSource?
     
     private struct Scaling {
         static let FaceRadiusToEyeRadiusRatio : CGFloat = 10
@@ -48,7 +58,9 @@ class FaceView: UIView {
         pathToEye(.Left).stroke()
         pathToEye(.Right).stroke()
         
-        pathToSmile(-0.4).stroke()
+        let value = dataSource?.smilenessForFaceView(self) ?? 0.0
+            pathToSmile(value).stroke()
+        
     }
     
     private enum Eye {case Left, Right }

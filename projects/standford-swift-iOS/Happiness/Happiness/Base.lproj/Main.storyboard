@@ -20,7 +20,18 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="9z9-fV-5E1" customClass="FaceView" customModule="Happiness" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" red="0.33333333329999998" green="0.91947992700000003" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineScale">
+                                        <real key="value" value="0.90000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <animations/>
@@ -32,6 +43,9 @@
                             <constraint firstItem="9z9-fV-5E1" firstAttribute="leading" secondItem="JoA-Gx-hdc" secondAttribute="leading" id="t83-47-p1c"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="9z9-fV-5E1" id="GUw-Q8-e92"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBa-Z5-RN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

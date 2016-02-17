@@ -58,8 +58,8 @@
 			children = (
 				7BD7FB001C73228F00F98007 /* HappinessViewController.swift */,
 				7BD7FAF11C7321EF00F98007 /* Main.storyboard */,
-				7BD7FAFF1C73220700F98007 /* Assets */,
 				7BD7FB021C73230500F98007 /* FaceView.swift */,
+				7BD7FAFF1C73220700F98007 /* Assets */,
 			);
 			path = Happiness;
 			sourceTree = "<group>";

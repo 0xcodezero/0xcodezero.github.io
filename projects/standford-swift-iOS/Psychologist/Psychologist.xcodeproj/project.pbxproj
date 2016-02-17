@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		7BD7FB111C749C1D00F98007 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD7FB101C749C1D00F98007 /* AppDelegate.swift */; };
-		7BD7FB131C749C1D00F98007 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD7FB121C749C1D00F98007 /* ViewController.swift */; };
+		7BD7FB131C749C1D00F98007 /* PsychologistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD7FB121C749C1D00F98007 /* PsychologistViewController.swift */; };
 		7BD7FB161C749C1D00F98007 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7FB141C749C1D00F98007 /* Main.storyboard */; };
 		7BD7FB181C749C1D00F98007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7FB171C749C1D00F98007 /* Assets.xcassets */; };
 		7BD7FB1B1C749C1D00F98007 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD7FB191C749C1D00F98007 /* LaunchScreen.storyboard */; };
+		7BD7FB241C74A40400F98007 /* HappinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD7FB221C74A40400F98007 /* HappinessViewController.swift */; };
+		7BD7FB251C74A40400F98007 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD7FB231C74A40400F98007 /* FaceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7BD7FB0D1C749C1D00F98007 /* Psychologist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psychologist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD7FB101C749C1D00F98007 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7BD7FB121C749C1D00F98007 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7BD7FB121C749C1D00F98007 /* PsychologistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsychologistViewController.swift; sourceTree = "<group>"; };
 		7BD7FB151C749C1D00F98007 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7BD7FB171C749C1D00F98007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BD7FB1A1C749C1D00F98007 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BD7FB1C1C749C1D00F98007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BD7FB221C74A40400F98007 /* HappinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HappinessViewController.swift; sourceTree = "<group>"; };
+		7BD7FB231C74A40400F98007 /* FaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +58,10 @@
 		7BD7FB0F1C749C1D00F98007 /* Psychologist */ = {
 			isa = PBXGroup;
 			children = (
+				7BD7FB221C74A40400F98007 /* HappinessViewController.swift */,
+				7BD7FB231C74A40400F98007 /* FaceView.swift */,
 				7BD7FB101C749C1D00F98007 /* AppDelegate.swift */,
-				7BD7FB121C749C1D00F98007 /* ViewController.swift */,
+				7BD7FB121C749C1D00F98007 /* PsychologistViewController.swift */,
 				7BD7FB141C749C1D00F98007 /* Main.storyboard */,
 				7BD7FB171C749C1D00F98007 /* Assets.xcassets */,
 				7BD7FB191C749C1D00F98007 /* LaunchScreen.storyboard */,
@@ -135,8 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BD7FB131C749C1D00F98007 /* ViewController.swift in Sources */,
+				7BD7FB131C749C1D00F98007 /* PsychologistViewController.swift in Sources */,
+				7BD7FB241C74A40400F98007 /* HappinessViewController.swift in Sources */,
 				7BD7FB111C749C1D00F98007 /* AppDelegate.swift in Sources */,
+				7BD7FB251C74A40400F98007 /* FaceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

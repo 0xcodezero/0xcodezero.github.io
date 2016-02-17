@@ -21,6 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                         <real key="value" value="10"/>
@@ -32,6 +33,9 @@
                                         <real key="value" value="0.90000000000000002"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="XXt-le-8dK" appends="YES" id="FGI-8E-72O"/>
+                                </connections>
                             </view>
                         </subviews>
                         <animations/>
@@ -48,6 +52,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBa-Z5-RN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="XXt-le-8dK">
+                    <connections>
+                        <action selector="changeHappinessLevel:" destination="hfT-kc-9AM" id="X2j-2e-pGR"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="242" y="410"/>
         </scene>

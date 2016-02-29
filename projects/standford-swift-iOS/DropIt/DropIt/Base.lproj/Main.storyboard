@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XPQ-I3-eFk">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Drop It View Controller-->
+        <scene sceneID="0y4-9y-28f">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XPQ-I3-eFk" customClass="DropItViewController" customModule="DropIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="4xE-7C-3MH"/>
+                        <viewControllerLayoutGuide type="bottom" id="qXh-aR-Wz5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="Gth-S0-ogN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dh7-gM-2tg">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.61960784310000006" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="4c1-71-DeH" appends="YES" id="Pf5-Iy-3Wx"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dh7-gM-2tg" firstAttribute="top" secondItem="Gth-S0-ogN" secondAttribute="top" id="Lil-Tr-hTI"/>
+                            <constraint firstItem="dh7-gM-2tg" firstAttribute="bottom" secondItem="qXh-aR-Wz5" secondAttribute="top" id="qHd-Ym-UBi"/>
+                            <constraint firstAttribute="trailing" secondItem="dh7-gM-2tg" secondAttribute="trailing" id="qwZ-fp-gvG"/>
+                            <constraint firstItem="dh7-gM-2tg" firstAttribute="leading" secondItem="Gth-S0-ogN" secondAttribute="leading" id="tIN-1K-vJR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="myGameView" destination="dh7-gM-2tg" id="bBZ-Ff-wg9"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8j-QW-qmd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4c1-71-DeH">
+                    <connections>
+                        <action selector="pan:" destination="XPQ-I3-eFk" id="eXr-al-d2f"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="621" y="425"/>
         </scene>
     </scenes>
 </document>

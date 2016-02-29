@@ -12,6 +12,7 @@
 		7B94D1CF1C845ED90045B77D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B94D1CE1C845ED90045B77D /* Assets.xcassets */; };
 		7B94D1D21C845ED90045B77D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B94D1D01C845ED90045B77D /* LaunchScreen.storyboard */; };
 		7B94D1DA1C8462430045B77D /* DropItViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94D1D91C8462430045B77D /* DropItViewController.swift */; };
+		7B94D1DC1C8477440045B77D /* DropItBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94D1DB1C8477440045B77D /* DropItBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		7B94D1D11C845ED90045B77D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B94D1D31C845ED90045B77D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B94D1D91C8462430045B77D /* DropItViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropItViewController.swift; sourceTree = "<group>"; };
+		7B94D1DB1C8477440045B77D /* DropItBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropItBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				7B94D1D01C845ED90045B77D /* LaunchScreen.storyboard */,
 				7B94D1D31C845ED90045B77D /* Info.plist */,
 				7B94D1D91C8462430045B77D /* DropItViewController.swift */,
+				7B94D1DB1C8477440045B77D /* DropItBehavior.swift */,
 			);
 			path = DropIt;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			files = (
 				7B94D1DA1C8462430045B77D /* DropItViewController.swift in Sources */,
 				7B94D1C81C845ED90045B77D /* AppDelegate.swift in Sources */,
+				7B94D1DC1C8477440045B77D /* DropItBehavior.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

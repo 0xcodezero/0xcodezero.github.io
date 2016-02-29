@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="myGameView" destination="dh7-gM-2tg" id="bBZ-Ff-wg9"/>
+                        <outlet property="gameView" destination="dh7-gM-2tg" id="AMb-Dd-hrQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8j-QW-qmd" userLabel="First Responder" sceneMemberID="firstResponder"/>

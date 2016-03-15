@@ -7,29 +7,37 @@
 //
 
 import UIKit
+import CoreLocation
 
-class BeaconStatusViewController: UIViewController {
-
+class BeaconStatusViewController: UIViewController, CLLocationManagerDelegate
+{
+    
+    let locationManager = CLLocationManager()
+    let region = CLBeaconRegion(proximityUUID: NSUUID(UUIDString: "bb1ea592-270e-48f4-89d1-8f8aa9768466")!, identifier: "First Beacon to read")
+    let colors = [6: UIColor.redColor(), 5:UIColor.blueColor()]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        locationManager.delegate = self
+        
+        if( CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways )
+        {
+            locationManager.requestAlwaysAuthorization()
+        }
+        
+        locationManager.startRangingBeaconsInRegion(region)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
+        let nearBeacons = beacons.filter{$0.proximity != CLProximity.Unknown}
+        if nearBeacons.count > 0 {
+            let closestBeacon = nearBeacons[0] as CLBeacon
+            self.view.backgroundColor = colors[closestBeacon.minor.integerValue]
+        }else
+        {
+            self.view.backgroundColor = UIColor.whiteColor()
+        }
     }
-    */
-
 }

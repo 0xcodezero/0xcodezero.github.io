@@ -138,6 +138,68 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', animateOnScroll);
     // Slight delay to ensure DOM is fully loaded
     setTimeout(animateOnScroll, 300);
+    
+    // Video Modal Functionality
+    const videoModal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const videoSource = modalVideo.querySelector('source');
+    const closeModal = document.querySelector('.close-modal');
+    const videoLinks = document.querySelectorAll('.video-link');
+    
+    // Open modal when clicking on a video link
+    videoLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const videoSrc = this.getAttribute('data-video');
+            videoSource.setAttribute('src', videoSrc);
+            modalVideo.load(); // Important: reload the video with new source
+            
+            // Show modal with animation
+            videoModal.style.display = 'flex';
+            setTimeout(() => {
+                videoModal.classList.add('show');
+            }, 10);
+            
+            // Start playing the video
+            modalVideo.play();
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Close modal function
+    function closeVideoModal() {
+        modalVideo.pause();
+        videoModal.classList.remove('show');
+        
+        // Wait for animation to complete before hiding
+        setTimeout(() => {
+            videoModal.style.display = 'none';
+            videoSource.setAttribute('src', '');
+            modalVideo.load();
+        }, 300);
+        
+        // Re-enable body scrolling
+        document.body.style.overflow = '';
+    }
+    
+    // Close modal when clicking the close button
+    closeModal.addEventListener('click', closeVideoModal);
+    
+    // Close modal when clicking outside the content
+    videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) {
+            closeVideoModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal.classList.contains('show')) {
+            closeVideoModal();
+        }
+    });
 });
 
 // Add CSS animations dynamically

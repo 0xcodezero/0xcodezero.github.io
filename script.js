@@ -3,6 +3,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set current year for copyright
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    // Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    document.body.appendChild(overlay);
+    
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Prevent scrolling when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+    
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on a nav link (mobile)
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+    
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav a, .footer-links a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

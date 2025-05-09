@@ -1,0 +1,159 @@
+/* Custom styles for the AI Project Landing Page */
+body {
+    background: #f8fafc;
+    color: #222;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.header {
+    background: #003366;
+    color: #fff;
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+    border-bottom: 4px solid #0dcaf0;
+}
+.project-embed {
+    margin: 2rem auto;
+    max-width: 700px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(63,69,81,0.09);
+    padding: 2rem;
+}
+.cases-section {
+    margin: 2rem auto;
+    width: 90%;
+    max-width: none;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px 0 rgba(63,69,81,0.09);
+    padding: 2rem;
+}
+.cases-list {
+    list-style: none;
+    padding: 0;
+}
+
+.case-item {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.case-button {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    background: #003366;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.case-button:hover {
+    background: #004d99;
+}
+
+.case-button .arrow {
+    transition: transform 0.3s;
+}
+
+.case-button.active .arrow {
+    transform: rotate(180deg);
+}
+
+.case-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.case-content.open {
+    max-height: 600px;
+}
+
+.case-iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    display: block;
+}
+
+.patient-group {
+    margin-bottom: 1.5rem;
+}
+
+.patient-header {
+    background: #004d99;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.patient-header .arrow {
+    transition: transform 0.3s;
+}
+
+.patient-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+.patient-cases {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    background: #f8f9fa;
+    border-radius: 0 0 8px 8px;
+}
+
+.patient-cases.open {
+    max-height: 2000px;
+    padding: 1rem;
+}
+.patient-group {
+    margin-bottom: 1rem;
+}
+
+.patient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #003366;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.intervention-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.intervention-list.show {
+    display: block;
+}
+
+.intervention-item {
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.intervention-item:last-child {
+    border-bottom: none;
+}
+@media (max-width: 700px) {
+    .project-embed, .cases-section { padding: 1rem; }
+    .case-viewer { min-height: 250px; }
+}

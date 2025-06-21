@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+
 /* Custom styles for the AI Project Landing Page */
 body {
     background: #f8fafc;
-    color: #222;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    color: #003366;
+}
+
 .header {
     background: #003366;
     color: #fff;
@@ -11,6 +22,11 @@ body {
     text-align: center;
     border-bottom: 4px solid #0dcaf0;
 }
+
+.header h1 {
+    color: #fff; /* Ensure header h1 is white */
+}
+
 .project-embed {
     margin: 2rem auto;
     max-width: 700px;
@@ -53,6 +69,8 @@ body {
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
 }
 
 .case-button:hover {
@@ -85,18 +103,18 @@ body {
 }
 
 .patient-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .patient-header {
-    background: #004d99;
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #003366;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .patient-header .arrow {
@@ -118,20 +136,6 @@ body {
 .patient-cases.open {
     max-height: 2000px;
     padding: 1rem;
-}
-.patient-group {
-    margin-bottom: 1rem;
-}
-
-.patient-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #003366;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 .intervention-list {

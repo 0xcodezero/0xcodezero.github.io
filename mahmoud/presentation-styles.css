@@ -1,0 +1,1297 @@
+/* TAME Presentation Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-blue: #2563eb;
+    --secondary-blue: #3b82f6;
+    --dark-blue: #1e40af;
+    --accent-red: #dc2626;
+    --accent-green: #16a34a;
+    --accent-orange: #ea580c;
+    --background: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow: hidden;
+}
+
+.presentation-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Navigation */
+.presentation-nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+    z-index: 100;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.nav-btn:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.slide-counter {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    background: var(--background);
+    border-radius: 8px;
+}
+
+.fullscreen-btn,
+.menu-btn {
+    background: var(--secondary-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fullscreen-btn:hover,
+.menu-btn:hover {
+    background: var(--dark-blue);
+    transform: translateY(-2px);
+}
+
+/* Slide Menu */
+.slide-menu {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+    z-index: 200;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.slide-menu.active {
+    right: 0;
+}
+
+.menu-header {
+    background: var(--primary-blue);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.menu-header h3 {
+    font-size: 1.5rem;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.close-menu:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.menu-content {
+    padding: 1.5rem;
+}
+
+.menu-section {
+    margin-bottom: 2rem;
+}
+
+.menu-section h4 {
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.menu-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.menu-item:hover {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+    transform: translateX(5px);
+}
+
+/* Slides */
+.slides-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: white;
+    margin: 0 2rem 2rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow-y: auto;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+.slide h2 {
+    font-size: 2.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 2rem;
+    border-bottom: 4px solid var(--primary-blue);
+    padding-bottom: 0.75rem;
+}
+
+.slide h3 {
+    font-size: 1.8rem;
+    color: var(--dark-blue);
+    margin: 1.5rem 0 1rem 0;
+}
+
+.slide h4 {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin: 1rem 0 0.5rem 0;
+}
+
+.slide p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.slide ul, .slide ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.slide li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+/* Title Slide */
+.title-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    color: white;
+    padding: 4rem;
+}
+
+.title-slide h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.title-slide h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    color: rgba(255,255,255,0.9);
+    border: none;
+}
+
+.presenter-info {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.presenter-info p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: white;
+}
+
+.presenter-info strong {
+    font-size: 1.5rem;
+}
+
+.conference-info p {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+/* Learning Objectives */
+.objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.objective-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-left: 5px solid var(--primary-blue);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.objective-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.objective-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.objective-card h3 {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.objective-card p {
+    color: var(--text-dark);
+    font-size: 1rem;
+}
+
+/* Two Column Layout */
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.two-column-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.column {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+/* Definition Box */
+.definition-box {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border-left: 5px solid var(--primary-blue);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.definition-box p {
+    margin: 0;
+}
+
+.definition-box strong {
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Timeline */
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline li {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--primary-blue);
+    padding-bottom: 1rem;
+}
+
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 13px;
+    height: 13px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+}
+
+.timeline strong {
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+}
+
+/* Feature List */
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(5px);
+}
+
+.feature-item .icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feature-item strong {
+    display: block;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Highlight Stat */
+.highlight-stat {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 5px solid var(--accent-orange);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.highlight-stat h4 {
+    color: var(--accent-orange);
+    margin-bottom: 0.5rem;
+}
+
+/* Mechanism & Science Content */
+.science-content,
+.cascade-content,
+.biomarker-content,
+.agent-content,
+.indications-content,
+.equipment-content,
+.anatomy-content,
+.targets-content {
+    padding: 1rem 0;
+}
+
+.mechanism-box,
+.cascade-diagram,
+.vegf-box,
+.properties-grid,
+.microsphere-content {
+    background: var(--background);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.cycle-diagram {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.cycle-step {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
+    text-align: center;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0 auto 1rem auto;
+}
+
+.cycle-step h4 {
+    font-size: 1.1rem;
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+}
+
+.cycle-step p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.arrow {
+    font-size: 2rem;
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+/* Evidence & Reference Boxes */
+.evidence-box,
+.reference-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-left: 5px solid var(--accent-green);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.reference-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left-color: var(--accent-orange);
+}
+
+.citation {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/* Cascade Diagram */
+.cascade-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.cascade-box {
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.cascade-box.primary {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 5px solid var(--accent-orange);
+}
+
+.cascade-box.inflammatory {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border-left: 5px solid var(--accent-red);
+}
+
+.cascade-box.mediators {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    border-left: 5px solid var(--primary-blue);
+}
+
+.cascade-box.angiogenesis {
+    background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+    border-left: 5px solid #7c3aed;
+}
+
+.cascade-box.pain {
+    background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+    border-left: 5px solid #be123c;
+}
+
+.mediator-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.mediator {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-blue);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Therapeutic Target */
+.therapeutic-target {
+    margin-top: 2rem;
+}
+
+.target-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid var(--accent-green);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.target-box ol {
+    margin-top: 1rem;
+}
+
+/* Biomarker Grid */
+.biomarker-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.biomarker-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--primary-blue);
+}
+
+.biomarker-card h4 {
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+}
+
+.implications-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+/* Properties Grid */
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.property-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.property-card h4 {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Check List */
+.check-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.check-list li {
+    padding-left: 0;
+    margin-bottom: 0.75rem;
+}
+
+/* Protocol Box */
+.protocol-box {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.protocol-steps {
+    margin-top: 1rem;
+}
+
+.protocol-steps p {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.protocol-box .note {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Advantages Box */
+.advantages-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+/* Preparation Protocol */
+.preparation-box {
+    margin-top: 2rem;
+}
+
+.prep-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.prep-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.step-num {
+    width: 35px;
+    height: 35px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.prep-step p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Application Box */
+.application-box,
+.comparison-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.protocol-detail {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.protocol-detail ol {
+    margin-top: 0.5rem;
+}
+
+/* Comparison Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background: var(--primary-blue);
+    color: white;
+}
+
+th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+    background: var(--background);
+}
+
+/* Note Box */
+.note-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 5px solid var(--accent-orange);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+}
+
+/* Indications Content */
+.primary-indication {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.indication-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.definition,
+.pathology {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+/* Selection Criteria */
+.criteria-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.inclusion-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid var(--accent-green);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.exclusion-box {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    border: 2px solid var(--accent-red);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.cross-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+/* Other Indications */
+.other-indications {
+    margin-top: 2rem;
+}
+
+.other-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.other-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--secondary-blue);
+}
+
+/* Evidence Highlight */
+.evidence-highlight {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.evidence-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.stat {
+    text-align: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Equipment Content */
+.access-section {
+    margin-bottom: 2rem;
+}
+
+.access-box {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.access-details {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.access-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.access-item strong {
+    display: block;
+    color: var(--primary-blue);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+/* Equipment Grid */
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.equipment-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-blue);
+}
+
+.equipment-card h4 {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Anesthesia Section */
+.anesthesia-section {
+    margin-top: 2rem;
+}
+
+.anesthesia-box {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.anesthesia-step {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.anesthesia-step strong {
+    display: block;
+    color: var(--accent-green);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.anesthesia-step p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Anatomy Content */
+.anatomy-overview {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.vessel-tree {
+    background: var(--background);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.main-vessel h4 {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.branches-level-1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.branch-group {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.branch-group h5 {
+    color: var(--accent-green);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.clinical-note {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+/* Target Vessels Grid */
+.target-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.target-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    border-left: 5px solid var(--secondary-blue);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.target-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px -5px rgb(0 0 0 / 0.2);
+}
+
+.target-card.priority-1 {
+    border-left-color: var(--accent-red);
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+}
+
+.target-number {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.target-card.priority-1 .target-number {
+    background: var(--accent-red);
+}
+
+.target-card h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+}
+
+.target-details p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.target-details strong {
+    color: var(--dark-blue);
+}
+
+/* Technique Notes */
+.technique-notes {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.principle-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.principle-box p {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+    padding-left: 1rem;
+}
+
+/* Progress Bar */
+.progress-bar {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-blue);
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* References */
+.references-content {
+    padding: 1rem 0;
+}
+
+.reference-section {
+    margin-bottom: 3rem;
+}
+
+.reference-section h3 {
+    color: var(--primary-blue);
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.reference-list {
+    list-style: none;
+    counter-reset: ref-counter;
+    margin-left: 0;
+}
+
+.reference-list li {
+    counter-increment: ref-counter;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.reference-list li::before {
+    content: "[" counter(ref-counter) "]";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+}
+
+.contact-info {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .objectives-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-column,
+    .two-column-equal {
+        grid-template-columns: 1fr;
+    }
+
+    .properties-grid,
+    .equipment-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .branches-level-1,
+    .target-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 2rem 1.5rem;
+    }
+
+    .slide h2 {
+        font-size: 2rem;
+    }
+
+    .title-slide h1 {
+        font-size: 2.5rem;
+    }
+
+    .title-slide h2 {
+        font-size: 1.5rem;
+    }
+
+    .nav-controls {
+        gap: 1rem;
+    }
+
+    .slide-counter {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .properties-grid,
+    .equipment-grid,
+    .biomarker-grid,
+    .evidence-stats,
+    .anesthesia-box {
+        grid-template-columns: 1fr;
+    }
+
+    .cycle-diagram {
+        flex-direction: column;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+}

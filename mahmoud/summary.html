@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAME Research Papers - Comprehensive Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --border-color: #e1e8ed;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .key-takeaways {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .key-takeaways h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .key-takeaways h2::before {
+            content: "🎯";
+            font-size: 1.5rem;
+        }
+
+        .takeaway-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .takeaway-item {
+            background: var(--background);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .takeaway-item:hover {
+            transform: translateX(5px);
+        }
+
+        .takeaway-item strong {
+            color: var(--secondary-color);
+        }
+
+        .documents-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .document-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .document-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .document-card.featured {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .document-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .document-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .document-badge.featured {
+            background: var(--accent-color);
+        }
+
+        .document-badge.technical {
+            background: var(--success-color);
+        }
+
+        .author-info {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-details h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.2rem;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .content-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .content-section p, .content-section li {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            overflow-x: auto;
+            display: block;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--background);
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .evidence-card {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--success-color);
+        }
+
+        .evidence-card strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .procedure-steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .procedure-steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .procedure-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: var(--background);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .footer {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .document-title {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .note-box strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏥 TAME Research Papers</h1>
+            <p>Comprehensive Summary of Trans-arterial Micro-Embolization Studies</p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">10</span>
+                <span class="stat-label">Documents Analyzed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Key Authors</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">2012</span>
+                <span class="stat-label">TAME Started</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">70-86%</span>
+                <span class="stat-label">Success Rate</span>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="key-takeaways">
+            <h2>Key Takeaways</h2>
+            <div class="takeaway-list">
+                <div class="takeaway-item">
+                    <strong>TAME Overview:</strong> Trans-arterial Micro-Embolization is a groundbreaking minimally invasive technique pioneered by Dr. Yuji Okuno starting in 2012, with first publication in 2015.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Mechanism:</strong> Targets pathological neoangiogenesis (abnormal new blood vessels) that sustain chronic inflammation in musculoskeletal conditions.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Established Applications:</strong> Knee osteoarthritis, frozen shoulder, tendinopathies, plantar fasciitis with 70-86% improvement rates.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Emerging Applications:</strong> Coccydynia (tailbone pain) showing strong theoretical basis, awaiting clinical trials.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Embolic Agents:</strong> Imipenem/Cilastatin (50-150 µm particles) or Nexsphere gelatin particles (100-300 µm) for temporary vessel occlusion.
+                </div>
+                <div class="takeaway-item">
+                    <strong>International Adoption:</strong> Spreading from Japan to Taiwan, Germany, Singapore, and other countries worldwide.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Advantages:</strong> Minimally invasive, rapid recovery (1-2 days), targets root cause, preserves anatomy, reduces medication dependence.
+                </div>
+                <div class="takeaway-item">
+                    <strong>Paradigm Shift:</strong> TAME addresses the inflammatory source rather than merely blocking pain signals, representing a disease-modifying approach.
+                </div>
+            </div>
+        </div>
+
+        <!-- Documents -->
+        <div class="documents-grid">
+
+            <!-- Document 1 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">1. Experience with Fast Resolvable Material for TAME Procedure</div>
+                    <span class="document-badge">70 Slides</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">YO</div>
+                    <div class="author-details">
+                        <h3>Dr. Yuji Okuno, MD, PhD</h3>
+                        <p>Chief Director, Okuno Clinic | Keio University Graduate School, Tokyo, Japan</p>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <p><strong>Focus:</strong> Fast-resolvable embolic materials used in TAME procedures</p>
+                    <div class="note-box">
+                        <strong>Note:</strong> This is a 70-slide presentation that is primarily image-based (clinical images and angiograms) with minimal extractable text. Dr. Okuno is the pioneer who developed the TAME technique.
+                    </div>
+                    <div class="tag-list">
+                        <span class="tag">Pioneer Research</span>
+                        <span class="tag">Image-Heavy</span>
+                        <span class="tag">Clinical Cases</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document 2 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">2. JSIR Conference Document</div>
+                    <span class="document-badge">Conference</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">YO</div>
+                    <div class="author-details">
+                        <h3>Dr. Yuji Okuno, MD, PhD</h3>
+                        <p>Okuno Clinic | Keio University, Tokyo</p>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <p><strong>Event:</strong> 53rd JSIR (Japanese Society of Interventional Radiology) Conference, Wakayama</p>
+                    <p>Brief document for conference presentation - likely title page or abstract submission.</p>
+                </div>
+            </div>
+
+            <!-- Document 3 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">3. Role of TAME in Management of Chronic MSK Pain</div>
+                    <span class="document-badge">39 Slides</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">KL</div>
+                    <div class="author-details">
+                        <h3>Dr. Keng Wei Liang, MD</h3>
+                        <p>Diagnostic/Interventional Radiologist | Medical University Hospital, Central Taiwan</p>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <p><strong>Presentation Date:</strong> May 23, 2024 - 53rd JSIR Conference, Wakayama, Japan</p>
+                    <p>Focus on TAME's role in chronic musculoskeletal pain management. Image-based presentation demonstrating international adoption of the technique.</p>
+                </div>
+            </div>
+
+            <!-- Document 4 -->
+            <div class="document-card featured">
+                <div class="document-header">
+                    <div class="document-title">4. MSK Pain Management Presentation</div>
+                    <span class="document-badge featured">Featured</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">MG</div>
+                    <div class="author-details">
+                        <h3>Dr. Mahmoud Ghalab</h3>
+                        <p>Lecturer & Consultant of Interventional Radiology | Member of American SIR</p>
+                    </div>
+                </div>
+
+                <div class="section-title">Pain-Related MSK Pathologies</div>
+                <div class="content-section">
+                    <ul>
+                        <li>Spinal spondylo-degenerative changes</li>
+                        <li>Joint osteoarthritis changes</li>
+                        <li>Bursitis</li>
+                        <li>Tendinitis and teno-synovitis</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Spinal Interventions</div>
+                <div class="content-section">
+                    <h4>Lumbar Epidural Injections (Transforaminal Approach)</h4>
+                    <p><strong>Indications:</strong> Chronic low back and/or lower extremity pain ≥3-6 months</p>
+                    <ul>
+                        <li>Disc herniation/lumbar radiculitis</li>
+                        <li>Lumbar spinal stenosis</li>
+                        <li>Axial/discogenic low back pain</li>
+                        <li>Post-lumbar surgery syndrome</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>Target-Specific Approach:</strong> Injectate placed over relevant nerve root to maximize drug concentration at ventral epidural space and dorsal root ganglion.
+                    </div>
+                </div>
+
+                <div class="section-title">Knee Pain Management</div>
+                <div class="content-section">
+                    <h4>Epidemiology</h4>
+                    <p>Chronic knee pain affects approximately <strong>10% of men and 13% of women</strong> over age 60.</p>
+
+                    <h4>Genicular Nerve Block (GNB) & Radiofrequency Ablation</h4>
+                    <ul>
+                        <li>Novel minimally invasive alternative to total knee arthroplasty</li>
+                        <li>Targets: Superomedial, inferomedial, and superolateral genicular nerves</li>
+                        <li>Guidance: Ultrasound or fluoroscopy</li>
+                    </ul>
+
+                    <h4>Genicular Artery Embolization (GAE)</h4>
+                    <div class="highlight-box">
+                        <p><strong>Mechanism:</strong> Targets abnormal neovascularization in chronic inflammation</p>
+                        <p><strong>Complications:</strong></p>
+                        <ul>
+                            <li>Transient skin mottling</li>
+                            <li>Paresthesia</li>
+                            <li>Bone infarction (rare)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Intra-articular Steroid Injections</h4>
+                    <p>Corticosteroids reduce inflammation by:</p>
+                    <ul>
+                        <li>Reducing vascular permeability</li>
+                        <li>Inhibiting inflammatory cell accumulation</li>
+                        <li>Preventing synthesis of prostaglandins and leukotrienes</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Other Joint Interventions</div>
+                <div class="content-section">
+                    <h4>Ankle/Foot</h4>
+                    <ul>
+                        <li>US-guided aspiration of retro-calcaneal bursitis</li>
+                        <li>US-guided injection for plantar fasciitis</li>
+                    </ul>
+
+                    <h4>Shoulder</h4>
+                    <ul>
+                        <li>Suprascapular nerve block for chronic shoulder pain</li>
+                        <li>US-guided subacromion-subdeltoid bursitis injection</li>
+                        <li>US-guided biceps tendinitis injection</li>
+                    </ul>
+
+                    <h4>Hip</h4>
+                    <ul>
+                        <li>US-guided greater trochanteric bursitis injection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Document 5 -->
+            <div class="document-card featured">
+                <div class="document-header">
+                    <div class="document-title">5. Shoulder TAME - Technical Guide</div>
+                    <span class="document-badge technical">Technical</span>
+                </div>
+                <div class="content-section">
+                    <p><strong>Focus:</strong> Adhesive Capsulitis (Frozen Shoulder) Treatment</p>
+                </div>
+
+                <div class="section-title">Procedure Setup</div>
+                <div class="content-section">
+                    <ul>
+                        <li><strong>Access:</strong> Ipsilateral transradial approach with 3 Fr sheath</li>
+                        <li><strong>Catheter:</strong> 3.3 Fr JR catheter (60-67 cm for ipsilateral, 80-107 cm for contralateral)</li>
+                        <li><strong>Technique:</strong> Microcatheter as wire with Y-connector and three-way valve</li>
+                        <li><strong>Imaging:</strong> Subtraction at outer 1/2 of subclavian artery</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Six Main Target Vessels</div>
+                <div class="content-section">
+                    <ol class="procedure-steps">
+                        <li>
+                            <strong>Suprascapular Artery</strong> (Most Important)
+                            <ul>
+                                <li>Origin: Thyrocervical trunk (from subclavian)</li>
+                                <li>Five anatomical variants exist</li>
+                                <li>Injection: 0.3 ml × 4 times = 1.2 ml</li>
+                                <li>Avoid vertebral artery by rotating catheter upward/laterally</li>
+                                <li>Can add suprascapular nerve block</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Thoracoacromial Artery</strong>
+                            <ul>
+                                <li>Access by pulling catheter laterally with anticlockwise rotation</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Circumflex Scapular Artery</strong>
+                            <ul>
+                                <li>Located at medial aspect of axillary artery</li>
+                                <li>Circumflex branch supplies inferiomedial glenohumeral capsule</li>
+                                <li>Descending branch along medial scapula</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Anterior Circumflex Humeral Artery</strong>
+                            <ul>
+                                <li>Small branch ascending from axillary/subclavian junction</li>
+                                <li>Supplies humeral head and long head of biceps</li>
+                                <li>Important for anterior shoulder pain and biceps tendinopathy</li>
+                                <li>Injection: 0.2 ml + 0.2 ml</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Posterior Circumflex Humeral Artery</strong>
+                            <ul>
+                                <li>Larger vessel at lower axillary level</li>
+                                <li>At junction of upper 1/3 and middle 1/3 of scapula</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Coracoid Branch</strong>
+                            <ul>
+                                <li>Very small vessel under coracoid process</li>
+                                <li>Inject through microcatheter within mother catheter</li>
+                                <li>No wedge injection due to small size</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="section-title">Embolic Agents</div>
+                <div class="content-section">
+                    <h4>Imipenem/Cilastatin</h4>
+                    <ul>
+                        <li>Dosage: 0.2 GM diluted in 10 ml contrast</li>
+                        <li>May use iso-osmolar contrast to reduce pain</li>
+                        <li>Injection: 0.2 ml then flush, repeat 3-4 times</li>
+                    </ul>
+
+                    <h4>Nexsphere Gelatin Particles</h4>
+                    <ul>
+                        <li>Size: 100-300 microns</li>
+                        <li>Preparation: Add 3 ml saline, shake for minutes, then 3 ml contrast</li>
+                        <li>Always shake before injection</li>
+                        <li>Alternating injection with Imipenem</li>
+                        <li>Injection: 0.2 ml then flush</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Technique Notes:</strong>
+                        <ul>
+                            <li>No need to insert microcatheter deeply</li>
+                            <li>No wedge embolization for small feeders</li>
+                            <li>Compare blush before and after</li>
+                            <li>Return to vessels at end for repeat embolization if needed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-title">Special Cases: Post-Herpetic Neuritis</div>
+                <div class="content-section">
+                    <p>For chest/back pain around shoulder region:</p>
+                    <ul>
+                        <li>Use metallic skin markers to identify pain sites</li>
+                        <li>Additional targets: Deep cervical, superior intercostal, descending cervical, transverse cervical arteries</li>
+                        <li>Target muscular branches of trapezius at pain site</li>
+                        <li>Avoid unnecessary embolization if no joint pathology</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Document 6 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">6. TAME Final for Knee and Shoulder (PDF)</div>
+                    <span class="document-badge">Scanned Document</span>
+                </div>
+                <div class="content-section">
+                    <div class="note-box">
+                        <strong>Document Type:</strong> This is a scanned PDF (26 pages) created from Samsung scanner. The text is embedded in images without a text layer, making automated extraction impossible without OCR (Optical Character Recognition) software.
+                    </div>
+                    <p><strong>Content:</strong> Likely contains clinical images, angiographic findings, and detailed case presentations for both knee and shoulder TAME procedures.</p>
+                    <div class="tag-list">
+                        <span class="tag">Scanned Images</span>
+                        <span class="tag">26 Pages</span>
+                        <span class="tag">Knee & Shoulder</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document 7 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">7. TAME for Frozen Shoulder and Postherpetic Neuritis Pain (PDF)</div>
+                    <span class="document-badge">PDF Document</span>
+                </div>
+                <div class="content-section">
+                    <div class="note-box">
+                        <strong>Technical Note:</strong> PDF structure had errors preventing text extraction. Appears to be image/diagram-heavy document.
+                    </div>
+                    <p><strong>Topics Covered:</strong> TAME application for frozen shoulder and postherpetic neuritis pain management.</p>
+                </div>
+            </div>
+
+            <!-- Document 8 -->
+            <div class="document-card">
+                <div class="document-header">
+                    <div class="document-title">8. TAME in Germany</div>
+                    <span class="document-badge">International</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">MK</div>
+                    <div class="author-details">
+                        <h3>Dr. Marcus Karloh</h3>
+                        <p>marcus.katoh@helios-gesundheit.de</p>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <p><strong>Presentation:</strong> 20 slides at JSIR Conference, Wakayama, May 23, 2024</p>
+                    <p>Represents TAME implementation and experience in Germany, demonstrating international expansion of the technique.</p>
+                    <div class="tag-list">
+                        <span class="tag">Germany</span>
+                        <span class="tag">International Adoption</span>
+                        <span class="tag">Image-Based</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document 9 -->
+            <div class="document-card featured">
+                <div class="document-header">
+                    <div class="document-title">9. TAME in MSK Pain Management and Coccydynia</div>
+                    <span class="document-badge featured">Most Comprehensive</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">MG</div>
+                    <div class="author-details">
+                        <h3>Dr. Mahmoud Ghalab</h3>
+                        <p>Lecturer & Consultant of Interventional Radiology | Fellow, Hiroshima University, Japan</p>
+                    </div>
+                </div>
+                <div class="content-section">
+                    <p><strong>Presentation Venue:</strong> SGH (likely Singapore General Hospital), July 2025</p>
+                    <p><strong>Subtitle:</strong> "Can TAME Technique Change the Game?"</p>
+                </div>
+
+                <div class="section-title">TAME Overview</div>
+                <div class="content-section">
+                    <div class="highlight-box">
+                        <p><strong>Full Name:</strong> Trans-arterial Micro-Embolization</p>
+                        <p><strong>Pioneer:</strong> Dr. Yuji Okuno</p>
+                        <p><strong>Timeline:</strong> Started 2012, first publication 2015</p>
+                        <p><strong>First Study:</strong> Genicular Artery Embolization (GAE) for knee OA</p>
+                        <ul>
+                            <li>11 patients</li>
+                            <li>12-month follow-up</li>
+                            <li>Evaluated pain relief and functional improvement</li>
+                        </ul>
+                    </div>
+
+                    <h4>Mechanism of Action</h4>
+                    <p>Targets and blocks <strong>abnormal micro-vessels (neoangiogenesis)</strong> that develop in areas of chronic inflammation, thereby reducing pain. These vessels are fragile, leaky, and promote sensitization.</p>
+
+                    <h4>Established Applications</h4>
+                    <ul>
+                        <li>Knee osteoarthritis</li>
+                        <li>Frozen shoulder</li>
+                        <li>Bursitis</li>
+                        <li>Tendinitis and teno-synovitis</li>
+                        <li>Coccydynia (emerging)</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Coccydynia (Tailbone Pain)</div>
+                <div class="content-section">
+                    <h4>Pathophysiology</h4>
+                    <ul>
+                        <li><strong>Definition:</strong> Localized pain in coccyx region</li>
+                        <li><strong>Etiology:</strong> Trauma, repetitive strain, childbirth, idiopathic</li>
+                        <li><strong>Trigger:</strong> Sitting, leaning back, rising from seated position</li>
+                        <li><strong>Key Mechanism:</strong> Chronic inflammation cycle</li>
+                    </ul>
+
+                    <h4>Current Interventional Radiology Approaches</h4>
+                    <div class="evidence-grid">
+                        <div class="evidence-card">
+                            <strong>Ganglion Impar Blocks</strong>
+                            Local anesthetic + steroids to block ganglion impar nerve bundle
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Radiofrequency Ablation (RFA)</strong>
+                            Heat destroys nerve tissue for longer-lasting relief
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Neuromodulation</strong>
+                            Spinal cord stimulation (SCS) and peripheral nerve field stimulation (PNFS)
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Pelvic Embolization</strong>
+                            Well-established for chronic pelvic pain and pelvic congestion syndrome
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">Radiofrequency Ablation (RFA) - Detailed Protocol</div>
+                <div class="content-section">
+                    <h4>Mechanism</h4>
+                    <ul>
+                        <li>High-frequency alternating current (350-500 kHz)</li>
+                        <li>Target temperature: 80-90°C for 60-90 seconds</li>
+                        <li>Creates precise thermal lesion disrupting pain signals</li>
+                        <li>Nerve regeneration occurs over 6-18 months</li>
+                    </ul>
+
+                    <h4>Target Nerves</h4>
+                    <ul>
+                        <li><strong>Ganglion Impar (Walther's Ganglion):</strong> Retroperitoneal structure at sacrococcygeal junction providing sympathetic innervation to perineum, distal rectum, anus, and coccyx</li>
+                        <li><strong>Sacrococcygeal Nerves:</strong> Branches of sacral plexus (S4-S5, coccygeal nerves)</li>
+                    </ul>
+
+                    <h4>Access Routes</h4>
+                    <ul>
+                        <li>Transsacrococcygeal (through sacrococcygeal junction)</li>
+                        <li>Paramedian (lateral to junction)</li>
+                        <li>Anococcygeal (via anococcygeal ligament)</li>
+                        <li>Intercoccygeal (between coccygeal segments)</li>
+                    </ul>
+
+                    <h4>Procedure Steps</h4>
+                    <ol class="procedure-steps">
+                        <li><strong>Patient Positioning:</strong> Prone with pillow under pelvis to reduce lumbar lordosis</li>
+                        <li><strong>Imaging Setup:</strong> Fluoroscopy in AP and lateral views</li>
+                        <li><strong>Local Anesthesia:</strong> 1-2% lidocaine infiltration</li>
+                        <li><strong>Needle Placement:</strong> 22G RF cannula with 5-10mm active tip to target nerve</li>
+                        <li><strong>Sensory/Motor Testing:</strong> Sensory at 50Hz (0.3-0.5V); Motor at 2Hz (1.5-2V)</li>
+                        <li><strong>Lesion Creation:</strong> 80-90°C for 60-90 seconds per target</li>
+                    </ol>
+
+                    <div class="highlight-box">
+                        <strong>Technical Pearls:</strong>
+                        <ul>
+                            <li>Always perform diagnostic block before RFA</li>
+                            <li>Use multi-planar imaging for accurate placement</li>
+                            <li>Consider pulsed RFA for reduced neuritis risk</li>
+                            <li>Multiple lesions may be needed for complete coverage</li>
+                        </ul>
+                    </div>
+
+                    <h4>Patient Selection</h4>
+                    <p><strong>Inclusion Criteria:</strong></p>
+                    <ul>
+                        <li>Chronic coccydynia (pain >3-6 months)</li>
+                        <li>Failure of conservative management</li>
+                        <li>Positive diagnostic nerve block (≥50% relief)</li>
+                        <li>Localized pain without radiation</li>
+                        <li>Pain exacerbated by sitting/direct pressure</li>
+                    </ul>
+                    <p><strong>Exclusion Criteria:</strong></p>
+                    <ul>
+                        <li>Active infection at procedure site</li>
+                        <li>Uncorrected coagulopathy</li>
+                        <li>Pregnancy</li>
+                        <li>Unstable fracture requiring surgical fixation</li>
+                        <li>Malignancy or infection as cause</li>
+                    </ul>
+
+                    <h4>Recovery Timeline</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Timeline</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Immediate Post-Procedure</td>
+                                <td>0-3 days</td>
+                                <td>Local soreness, possible temporary pain increase. Rest and anti-inflammatory medication recommended.</td>
+                            </tr>
+                            <tr>
+                                <td>Early Recovery</td>
+                                <td>3-14 days</td>
+                                <td>Gradual reduction in discomfort. Initial pain relief begins.</td>
+                            </tr>
+                            <tr>
+                                <td>Intermediate Phase</td>
+                                <td>2-6 weeks</td>
+                                <td>Maximum therapeutic benefit achieved. Return to normal activities.</td>
+                            </tr>
+                            <tr>
+                                <td>Long-term Results</td>
+                                <td>6-18 months</td>
+                                <td>Sustained pain relief. Possible nerve regeneration may require repeat procedure.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Complications</h4>
+                    <p><strong>Common Side Effects (Mild):</strong></p>
+                    <ul>
+                        <li>Post-procedure soreness (1-3 days)</li>
+                        <li>Temporary numbness in treated area</li>
+                        <li>Bruising at needle insertion site</li>
+                        <li>Vasovagal reaction during procedure</li>
+                    </ul>
+                    <p><strong>Rare Complications:</strong></p>
+                    <ul>
+                        <li>Infection at insertion site (&lt;0.1%)</li>
+                        <li>Hematoma formation</li>
+                        <li>Neuritis or dysesthesia (0.5-1%)</li>
+                        <li>Unintended nerve damage</li>
+                    </ul>
+
+                    <h4>Clinical Evidence</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Study</th>
+                                <th>Patients</th>
+                                <th>Success Rate</th>
+                                <th>Follow-up</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Atim et al. (2011)</td>
+                                <td>15</td>
+                                <td>73%</td>
+                                <td>6 months</td>
+                            </tr>
+                            <tr>
+                                <td>Gopal et al. (2016)</td>
+                                <td>12</td>
+                                <td>83%</td>
+                                <td>12 months</td>
+                            </tr>
+                            <tr>
+                                <td>Karaman et al. (2017)</td>
+                                <td>21</td>
+                                <td>76%</td>
+                                <td>9 months</td>
+                            </tr>
+                            <tr>
+                                <td>Gunduz et al. (2020)</td>
+                                <td>18</td>
+                                <td>78%</td>
+                                <td>12 months</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight-box">
+                        <strong>Case Study Example:</strong>
+                        <p>42-year-old female with 3-year history of coccydynia following childbirth. Failed conservative management including NSAIDs, cushions, and physical therapy.</p>
+                        <p><strong>Intervention:</strong> Ganglion impar RFA following positive diagnostic block (80% temporary relief)</p>
+                        <p><strong>Outcome:</strong> 85% pain reduction at 2 weeks, maintained at 75% at 9-month follow-up. Return to normal activities including prolonged sitting. No complications.</p>
+                    </div>
+                </div>
+
+                <div class="section-title">TAME Technique for Coccydynia (Novel Application)</div>
+                <div class="content-section">
+                    <h4>Procedure Steps</h4>
+                    <ol class="procedure-steps">
+                        <li>Arterial access (radial or femoral artery)</li>
+                        <li>Catheter navigation to pelvic region</li>
+                        <li>Angiography to identify target vessels</li>
+                        <li>Identification of pathological "blush" (hypervascularity)</li>
+                        <li>Selective embolization with Imipenem/Cilastatin</li>
+                        <li>Confirmation of successful occlusion</li>
+                    </ol>
+
+                    <h4>Target Vessels</h4>
+                    <ul>
+                        <li><strong>Median Sacral Artery:</strong> Originates from aorta, descends anterior to sacrum and coccyx</li>
+                        <li><strong>Lateral Sacral Arteries:</strong> Arise from internal iliac artery, supply sacrum and coccyx</li>
+                        <li><strong>Focus:</strong> Branches showing abnormal hypervascularity ("blush")</li>
+                    </ul>
+
+                    <h4>Embolic Agent: Imipenem/Cilastatin</h4>
+                    <div class="highlight-box">
+                        <ul>
+                            <li>Forms temporary micro-particles (50-150 µm)</li>
+                            <li>Precisely sized to occlude abnormal vessels</li>
+                            <li>Spares larger, healthy arteries</li>
+                            <li>Temporary occlusion allows for tissue remodeling</li>
+                        </ul>
+                    </div>
+
+                    <h4>Patient Selection for TAME</h4>
+                    <p><strong>Ideal Candidates:</strong></p>
+                    <ul>
+                        <li>Chronic coccydynia (pain >3-6 months)</li>
+                        <li>Failed conservative treatment (cushions, PT, NSAIDs, local injections)</li>
+                        <li>MRI showing edema, contrast enhancement, or hypervascularity around coccyx</li>
+                        <li>Desire to avoid surgery</li>
+                    </ul>
+                    <p><strong>Contraindications:</strong></p>
+                    <ul>
+                        <li><strong>Absolute:</strong> Active local infection, severe contrast allergy, uncorrectable coagulopathy</li>
+                        <li><strong>Relative:</strong> Pregnancy, renal insufficiency, previous adverse reaction to embolic agents</li>
+                        <li><strong>Anatomical:</strong> Severe vascular anomalies preventing safe catheterization</li>
+                    </ul>
+
+                    <h4>Advantages of TAME</h4>
+                    <div class="evidence-grid">
+                        <div class="evidence-card">
+                            <strong>Minimally Invasive</strong>
+                            Small puncture site, no large incisions. Reduced pain, minimal scarring, lower infection risk vs. surgery.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Targeted Therapy</strong>
+                            Addresses underlying pathological process (neoangiogenesis) rather than blocking pain signals.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Preservation of Anatomy</strong>
+                            Unlike coccygectomy, preserves coccyx and surrounding structures.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Rapid Recovery</strong>
+                            1-2 days to resume normal activities vs. weeks/months for surgery.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Reduced Medication Dependence</strong>
+                            Significant reduction or cessation of long-term pain medications, including opioids.
+                        </div>
+                    </div>
+
+                    <h4>Recovery & Outcomes</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Timeline</th>
+                                <th>What to Expect</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Early Phase</td>
+                                <td>Days 1-7</td>
+                                <td>Possible temporary pain increase (post-embolization syndrome). Mild inflammation response normal. Rest and anti-inflammatory medication as needed.</td>
+                            </tr>
+                            <tr>
+                                <td>Intermediate Phase</td>
+                                <td>Weeks 1-4</td>
+                                <td>Gradual decrease in pain intensity. Improved mobility and comfort during sitting. Return to normal daily activities.</td>
+                            </tr>
+                            <tr>
+                                <td>Peak Improvement</td>
+                                <td>Weeks 6-12</td>
+                                <td>Most substantial pain relief achieved. Full effects of reduced inflammation apparent. Tissue remodeling complete.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Need for Recurrent Sessions</h4>
+                    <ul>
+                        <li>Single session provides long-lasting relief for many patients</li>
+                        <li>May need repeat if: incomplete initial embolization, recurrence of neoangiogenesis, persistent mechanical stress</li>
+                        <li>Follow-up angiogram can assess residual or recurrent pathological blush</li>
+                        <li>Repeat sessions generally safe and effective</li>
+                    </ul>
+
+                    <h4>Side Effects and Complications</h4>
+                    <p><strong>Common (Mild & Transient):</strong></p>
+                    <ul>
+                        <li>Access site: Minor pain, bruising, hematoma</li>
+                        <li>Post-embolization syndrome: Temporary inflammatory response with mild pain, low-grade fever, fatigue (resolves within days)</li>
+                        <li>Skin discoloration: Temporary, localized over treated area</li>
+                    </ul>
+                    <p><strong>Rare but Serious:</strong></p>
+                    <ul>
+                        <li>Non-target embolization: Accidental occlusion of healthy arteries (minimized by precise technique)</li>
+                        <li>Vessel injury: Dissection or perforation during catheter manipulation</li>
+                        <li>Allergic reaction: To contrast media or medications</li>
+                        <li>Infection: Rare at access site</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Treatment Comparison</div>
+                <div class="content-section">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Treatment</th>
+                                <th>Mechanism</th>
+                                <th>Invasiveness</th>
+                                <th>Target</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>TAME</strong></td>
+                                <td>Embolization of abnormal vessels</td>
+                                <td>Minimally invasive</td>
+                                <td>Inflammation source</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RFA</strong></td>
+                                <td>Thermal ablation of nerves</td>
+                                <td>Minimally invasive</td>
+                                <td>Pain signals</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Neuromodulation</strong></td>
+                                <td>Electrical stimulation</td>
+                                <td>Invasive (implant)</td>
+                                <td>Pain perception</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coccygeoplasty</strong></td>
+                                <td>Bone cement injection</td>
+                                <td>Minimally invasive</td>
+                                <td>Structural instability</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coccygectomy</strong></td>
+                                <td>Surgical removal</td>
+                                <td>Highly invasive</td>
+                                <td>Pain source removal</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight-box">
+                        <strong>Key Advantages of TAME:</strong>
+                        <ul>
+                            <li>Disease-modifying vs. symptomatic treatment</li>
+                            <li>Preserves anatomical structures</li>
+                            <li>Rapid recovery (1-2 days)</li>
+                            <li>Outpatient procedure</li>
+                            <li>Lower risk profile than surgery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-title">Evidence Base for TAME in MSK Conditions</div>
+                <div class="content-section">
+                    <div class="evidence-grid">
+                        <div class="evidence-card">
+                            <strong>Knee Osteoarthritis</strong>
+                            70% of patients reported >50% pain reduction at 6 months (Okuno et al., 2015)
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Frozen Shoulder</strong>
+                            Mean pain scores decreased from 7.4 to 2.1 at 6 months (Okuno et al., 2018)
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Tendinopathies</strong>
+                            86% of patients showed clinical improvement at 12 months (Iwamoto et al., 2017)
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Plantar Fasciitis</strong>
+                            Mean VAS pain scores decreased from 7.1 to 1.8 at 6 months (Okuno et al., 2020)
+                        </div>
+                    </div>
+
+                    <h4>Hypothetical Application to Coccydynia</h4>
+                    <ul>
+                        <li><strong>Shared Pathophysiology:</strong> Chronic inflammation and neoangiogenesis common to coccydynia and successfully treated conditions</li>
+                        <li><strong>Anatomical Feasibility:</strong> Well-defined arterial supply (median and lateral sacral arteries) accessible via standard angiographic techniques</li>
+                        <li><strong>Imaging Correlation:</strong> MRI in chronic coccydynia shows edema/enhancement patterns similar to other inflammatory MSK conditions</li>
+                        <li><strong>Translational Potential:</strong> Success in other axial skeletal regions suggests potential efficacy for coccyx</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Conclusion and Future Directions</div>
+                <div class="content-section">
+                    <div class="highlight-box">
+                        <p><strong>Key Conclusions:</strong></p>
+                        <ul>
+                            <li>TAME offers promising, minimally invasive approach for chronic coccydynia by targeting underlying inflammatory pathology</li>
+                            <li>Significant advantages over traditional treatments: anatomy preservation, rapid recovery, disease-modifying potential</li>
+                            <li>Patient selection critical: chronic pain, failed conservative treatment, imaging evidence of inflammation</li>
+                            <li>Strong scientific rationale based on successful TAME applications in other MSK conditions</li>
+                        </ul>
+                    </div>
+
+                    <h4>Future Research Needs</h4>
+                    <ul>
+                        <li>Pilot clinical trials specifically for coccydynia</li>
+                        <li>Long-term outcome studies (>1 year follow-up)</li>
+                        <li>Comparative effectiveness research vs. established treatments</li>
+                        <li>Refinement of patient selection criteria</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <p><strong>Paradigm Shift:</strong> TAME represents a new approach in coccydynia treatment, offering a targeted method that addresses the root cause rather than merely masking symptoms.</p>
+                    </div>
+                </div>
+
+                <div class="section-title">Additional Topics</div>
+                <div class="content-section">
+                    <h4>Pelvic Congestion Syndrome</h4>
+                    <p>Chronic deeply seated unexplained pelvic pain - differential diagnosis with coccydynia. Transcatheter arterial embolization already well-established for treating chronic pelvic pain in women.</p>
+                </div>
+            </div>
+
+            <!-- Document 10 -->
+            <div class="document-card featured">
+                <div class="document-header">
+                    <div class="document-title">10. Shoulder Glenohumeral Instability</div>
+                    <span class="document-badge technical">Anatomy Guide</span>
+                </div>
+                <div class="author-info">
+                    <div class="author-avatar">AA</div>
+                    <div class="author-details">
+                        <h3>Aya Mohamed Abd Elgaleel</h3>
+                        <p>Comprehensive MRI Anatomy and Pathology Reference</p>
+                    </div>
+                </div>
+
+                <div class="section-title">Shoulder Anatomy & Stability</div>
+                <div class="content-section">
+                    <div class="highlight-box">
+                        <p>The shoulder is a ball-and-socket joint with very wide range of motion due to smaller socket, making it the <strong>most unstable joint in the body.</strong></p>
+                        <p><strong>Most dislocated joint:</strong> 85% of shoulder dislocations are glenohumeral.</p>
+                    </div>
+
+                    <h4>Stabilizing Structures</h4>
+                    <p><strong>Dynamic Restraints:</strong></p>
+                    <ul>
+                        <li>Rotator cuff muscles</li>
+                        <li>Long head biceps brachii tendon</li>
+                    </ul>
+                    <p><strong>Static Restraints:</strong></p>
+                    <ul>
+                        <li>Glenohumeral ligaments (SGHL, MGHL, IGHL)</li>
+                        <li>Glenohumeral joint capsule</li>
+                        <li>Labrum (glenoid labrum)</li>
+                    </ul>
+
+                    <h4>Regional Support</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>Structures</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Superior</strong></td>
+                                <td>Coracoacromial arch, coracoacromial ligament, long head biceps tendon, supraspinatus tendon</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Anterior</strong></td>
+                                <td>Anterior labrum, glenohumeral ligaments (SGHL, MGHL, IGHL anterior band), subscapularis tendon</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Posterior</strong></td>
+                                <td>Posterior labrum, posterior band of IGHL, infraspinatus and teres minor tendons</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-title">Rotator Cuff</div>
+                <div class="content-section">
+                    <p>The rotator cuff muscles and tendons stabilize the shoulder joint during movements. Without the rotator cuff, the humeral head would ride up out of the glenoid fossa.</p>
+
+                    <h4>Supraspinatus Tendon</h4>
+                    <ul>
+                        <li><strong>Most important</strong> rotator cuff structure</li>
+                        <li>Subject to tendinopathy and tears</li>
+                        <li>Best visualized on coronal oblique and ABER views</li>
+                        <li>Axis often rotated anteriorly compared to muscle axis</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>Large Tears:</strong> May allow humeral head to migrate upwards, resulting in high-riding humeral head.
+                    </div>
+                </div>
+
+                <div class="section-title">ABER (Abduction-External Rotation) View</div>
+                <div class="content-section">
+                    <h4>Advantages for Assessment</h4>
+                    <div class="evidence-grid">
+                        <div class="evidence-card">
+                            <strong>Labral Tears</strong>
+                            Excellent for anteroinferior labrum (3-6 o'clock position). Stretches inferior GH ligament, creating tension on labrum.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Rotator Cuff Tears</strong>
+                            Releases tension on cuff, allowing subtle articular-sided partial tears to be visualized with contrast.
+                        </div>
+                        <div class="evidence-card">
+                            <strong>Biceps Anchor</strong>
+                            Better visualization of biceps anchor abnormalities.
+                        </div>
+                    </div>
+
+                    <h4>Key Structures to Assess</h4>
+                    <ul>
+                        <li>Biceps anchor at 12 o'clock</li>
+                        <li>Smooth undersurface of supraspinatus tendon</li>
+                        <li>Labrum at 3-6 o'clock position</li>
+                        <li>Smooth undersurface of infraspinatus tendon</li>
+                        <li>Anterior labrum integrity</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Labral Variants & Normal Anatomy</div>
+                <div class="content-section">
+                    <h4>Sublabral Recess</h4>
+                    <p>Variable attachment of superior labrum at 12 o'clock (biceps insertion):</p>
+                    <ul>
+                        <li><strong>Type I:</strong> No recess between glenoid cartilage and labrum</li>
+                        <li><strong>Type II:</strong> Small recess</li>
+                        <li><strong>Type III:</strong> Large sublabral recess</li>
+                    </ul>
+                    <p>Can be difficult to distinguish from SLAP tear or sublabral foramen.</p>
+
+                    <h4>Sublabral Foramen</h4>
+                    <ul>
+                        <li>Unattached anterosuperior labrum at 1-3 o'clock position</li>
+                        <li>Seen in <strong>11% of individuals</strong></li>
+                        <li>Normal variant, not pathologic</li>
+                        <li>Differentiation: Sublabral recess is at 12 o'clock only; SLAP tear involves biceps attachment</li>
+                    </ul>
+
+                    <h4>Os Acromiale</h4>
+                    <ul>
+                        <li>Failure of acromial ossification center to fuse</li>
+                        <li>Present in <strong>5% of population</strong></li>
+                        <li>Usually incidental finding</li>
+                        <li>May cause impingement if unstable (pulled inferiorly by deltoid during abduction)</li>
+                        <li><strong>Critical:</strong> Must mention in report, especially pre-surgery</li>
+                        <li>Best seen on superior axial images</li>
+                    </ul>
+                </div>
+
+                <div class="section-title">Shoulder Dislocations</div>
+                <div class="content-section">
+                    <h4>1. Anterior Dislocation (Most Common)</h4>
+                    <p>Antero-inferior dislocation, especially in younger patients results in Bankart fracture/lesion and instability with recurrent dislocations.</p>
+
+                    <p><strong>Associated Findings:</strong></p>
+                    <ul>
+                        <li><strong>Hill-Sachs Defect (50%):</strong> Posterosuperior depression of humeral head
+                            <ul>
+                                <li>Best seen on AP with internal rotation</li>
+                                <li>Located at or above coracoid level</li>
+                                <li>In first 18mm of proximal humeral head</li>
+                                <li>Present in 75-100% with anterior instability</li>
+                            </ul>
+                        </li>
+                        <li>Greater tuberosity fracture (15%)</li>
+                    </ul>
+
+                    <p><strong>Complications:</strong></p>
+                    <ul>
+                        <li>Recurrent dislocations (40%)</li>
+                        <li>Post-traumatic arthritis</li>
+                        <li>Injury to axillary nerve or artery</li>
+                        <li>Significant bone loss from recurrent dislocations</li>
+                    </ul>
+
+                    <h4>2. Posterior Dislocation (Rare: 2-4%)</h4>
+                    <div class="highlight-box">
+                        <strong>Clinical Challenge:</strong> >50% initially unrecognized and misdiagnosed as frozen shoulder
+                    </div>
+
+                    <p><strong>Associated Causes:</strong></p>
+                    <ul>
+                        <li>Epileptic seizures</li>
+                        <li>High-energy trauma</li>
+                        <li>Electrocution</li>
+                        <li>Electroconvulsive therapy</li>
+                    </ul>
+
+                    <p><strong>Imaging Signs:</strong></p>
+                    <ul>
+                        <li><strong>Rim Sign (66%):</strong> Distance >6mm between medial humeral head border and anterior glenoid rim</li>
+                        <li><strong>"Lightbulb Sign":</strong> Humeral head fixed in internal rotation</li>
+                        <li><strong>Trough Sign (75%):</strong> "Reverse Hill-Sachs" - compression fracture of anteromedial humeral head</li>
+                        <li>Fracture of posterior glenoid rim</li>
+                        <li>Avulsion fracture of lesser tuberosity</li>
+                    </ul>
+
+                    <div class="note-box">
+                        <strong>Imaging Tip:</strong> Isolated lesser tuberosity fractures should raise suspicion of associated posterior dislocation.
+                    </div>
+
+                    <h4>3. Superior Dislocation</h4>
+                    <p>Very rare type of shoulder dislocation.</p>
+                </div>
+
+                <div class="section-title">Labral Injury Classification</div>
+                <div class="content-section">
+                    <h4>MRI Criteria for Diagnosing Labral Tears</h4>
+                    <ul>
+                        <li>Surface irregularity</li>
+                        <li>Increased signal within labrum extending to surface</li>
+                        <li>Fluid or contrast imbibed into labrum substance</li>
+                        <li>Labral avulsions</li>
+                    </ul>
+
+                    <p><strong>Secondary Signs:</strong></p>
+                    <ul>
+                        <li>Paralabral cysts</li>
+                        <li>Periosteal stripping and tearing</li>
+                        <li>Bone injuries (Hill-Sachs, Osseous Bankart)</li>
+                        <li>Hyaline cartilage injuries (GLAD lesion)</li>
+                    </ul>
+
+                    <h4>Common Labral Lesions</h4>
+
+                    <div class="highlight-box">
+                        <p><strong>Bankart Lesion:</strong></p>
+                        <ul>
+                            <li>Location: Anteroinferior labrum (3-6 o'clock)</li>
+                            <li>Complete detachment with tearing of anterior scapular periosteum</li>
+                            <li>With/without osseous fragment of glenoid ("Osseous Bankart")</li>
+                            <li>Imaging sign: "Double axillary pouch sign"</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <p><strong>Reverse Bankart:</strong></p>
+                        <ul>
+                            <li>Location: Posteroinferior labrum (6-9 o'clock)</li>
+                            <li>Detachment with tearing of posterior scapular periosteum</li>
+                            <li>With/without osseous fragment</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <p><strong>SLAP Tears (Superior Labral Anterior-Posterior):</strong></p>
+                        <ul>
+                            <li>Location: Starts at 12 o'clock (biceps anchor)</li>
+                            <li>Typically extends from 10 to 2 o'clock position</li>
+                            <li>Can extend more posteriorly/anteriorly</li>
+                            <li>May extend into biceps tendon</li>
+                            <li>Distinguished from Bankart: Bankart is at 3-6 o'clock</li>
+                        </ul>
+                    </div>
+
+                    <h4>Specialized Labral Lesions</h4>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Lesion</th>
+                                <th>Description</th>
+                                <th>Key Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Perthes</strong></td>
+                                <td>Labroligamentous avulsion like Bankart</td>
+                                <td>Medially stripped but intact periosteum. Torn labrum may appear normal on neutral positioning. Best seen in ABER position.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ALPSA</strong></td>
+                                <td>Anterior Labral Periosteal Sleeve Avulsion</td>
+                                <td>Medially displaced labroligamentous complex. Anterior labrum absent from glenoid rim.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GLAD</strong></td>
+                                <td>GlenoLabral Articular Disruption</td>
+                                <td>Partial tear of anteroinferior labrum with adjacent cartilage damage.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>HAGL</strong></td>
+                                <td>Humeral Avulsion of inferior Glenohumeral Ligament</td>
+                                <td>Discontinuity of IGHL attachment on humerus with contrast leakage.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GAGL</strong></td>
+                                <td>Glenoid Avulsion of Glenohumeral Ligament</td>
+                                <td>Uncommon. IGHL avulsion from inferior glenoid pole without associated labral disruption.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>POLPSA</strong></td>
+                                <td>Posterior Labral Periosteal Sleeve Avulsion</td>
+                                <td>Posterior equivalent of ALPSA. Associated with posterior instability. Posterior labrum torn, posterior periosteum intact but stripped.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reverse HAGL</strong></td>
+                                <td>Posterior capsule avulsion</td>
+                                <td>Complete avulsion of posterior attachment from posterior humeral neck. Tear of posterior IGHL band.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Posterior GLAD</strong></td>
+                                <td>Posterior articular cartilage defect</td>
+                                <td>Newly described entity. Focal posterior articular defect (7-9 o'clock location).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bennett Lesion</strong></td>
+                                <td>Extra-articular posterior ossification</td>
+                                <td>Crescentic posterior ossification associated with posterior labral injury and capsular avulsion. Secondary to posterior subluxation. Best on CT. Often missed by arthroscopy (extra-articular).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-title">Additional Imaging Findings</div>
+                <div class="content-section">
+                    <h4>Muscle Atrophy</h4>
+                    <p>Sign of chronic rotator cuff tears. Assess rotator cuff muscle bulk and fatty infiltration.</p>
+
+                    <h4>Paralabral Cysts</h4>
+                    <p>Fluid-filled cysts adjacent to labral tears. Secondary sign of underlying labral pathology.</p>
+
+                    <h4>Post-operative Bankart</h4>
+                    <p>Follow-up imaging after Bankart repair to assess healing and anchors.</p>
+                </div>
+
+                <div class="section-title">Systematic Imaging Checklists</div>
+                <div class="content-section">
+                    <h4>Axial View Checklist</h4>
+                    <ol>
+                        <li>Os acromiale</li>
+                        <li>Supraspinatus tendon alignment with muscle</li>
+                        <li>Biceps tendon attachment at 12 o'clock</li>
+                        <li>Superior labrum and SGHL attachment</li>
+                        <li>SLAP lesions and variants (sublabral foramen)</li>
+                        <li>Hill-Sachs lesion (posterolateral humeral head at coracoid level)</li>
+                        <li>Subscapularis tendon holding biceps in groove</li>
+                        <li>Cartilage assessment</li>
+                        <li>Middle GHL and anterior labrum</li>
+                        <li>Buford complex variant</li>
+                        <li>Bankart lesions (3-6 o'clock position)</li>
+                        <li>Inferior GHL fibers</li>
+                    </ol>
+
+                    <h4>Coronal View Checklist</h4>
+                    <ol>
+                        <li>Coracoclavicular ligament and short head biceps</li>
+                        <li>Coracoacromial ligament</li>
+                        <li>Suprascapular nerve and vessels</li>
+                        <li>Supraspinatus impingement by AC joint spurs or thick coracoacromial ligament</li>
+                        <li>Superior biceps-labrum complex</li>
+                        <li>Sublabral recess or SLAP tear</li>
+                        <li>Excessive fluid in subacromial bursa</li>
+                        <li>Supraspinatus tears</li>
+                        <li>Rim-rent tears at anterior fiber insertion</li>
+                        <li>IGHL attachment at humerus</li>
+                        <li>Inferior labral-ligamentary complex</li>
+                        <li>HAGL lesion</li>
+                        <li>Infraspinatus tears</li>
+                        <li>Small Hill-Sachs lesions</li>
+                    </ol>
+
+                    <h4>Sagittal View Checklist</h4>
+                    <ol>
+                        <li>Rotator cuff muscle atrophy</li>
+                        <li>MGHL oblique course and relation to subscapularis</li>
+                        <li>Labral tears at 3-6 o'clock position</li>
+                        <li>Biceps anchor assessment</li>
+                        <li>Acromion shape</li>
+                        <li>AC joint impingement</li>
+                        <li>Rotator cuff interval with coracohumeral ligament</li>
+                        <li>Supraspinatus tears</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>TAME Research Collection Summary</strong></p>
+            <p>Generated on November 14, 2025</p>
+            <p>© Dr. Mahmoud Ghalab - TAME Pain Management Research</p>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <div class="scroll-to-top" id="scrollToTop">
+            ↑
+        </div>
+    </div>
+
+    <script>
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
